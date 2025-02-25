@@ -1,0 +1,247 @@
+body {
+    font-family: "Montserrat", serif;
+    background: #fff5e8;
+    margin: 0;
+}
+
+a:link, a:visited {
+    color: #01060d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+.wrapper {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* max-width: 1240px; */
+    position: relative;
+}
+
+.header {
+    background: linear-gradient(180deg, #ffeac8 0%, rgba(255, 253, 250, 0) 100%);
+}
+/*.header-title-box {}*/
+
+.header-title {
+    font-weight: 700;
+    font-size: 64px;
+    color: #01060d;
+    margin: 60px 24px 2px 60px;
+}
+
+.header-navigation-box {
+    display: flex;
+    align-items: end;
+}
+
+.header-navigation-btn {
+    padding-right: 60px;
+    margin: 0 0 2px 0;
+    font-weight: 400;
+    font-size: 24px;
+    color: #01060d;
+    align-items: end;
+}
+/* ----------------------------------------------------------------- */
+
+.background-pic-section {
+    width: 100%;
+}
+
+.background-pic-container {
+    position: relative; /* Makes the container a reference for absolute positioning */
+    /* margin: 85px 60px 60px 60px;  */
+    margin: 85px auto 60px auto; 
+    background-color: aqua;
+    border-radius: 48px;
+    max-width: 1240px;
+    overflow: hidden; /* Hide overflow */
+    white-space: normal;
+    padding: 24px; /* Padding inside the parent */
+    box-sizing: border-box; /* Include padding in width/height */
+    height: 566px;
+}
+
+.index-background-pic {
+    position: relative;
+    max-width: auto; 
+    height:100%;
+    scale: 2.2;
+    
+} 
+
+.background-pic-text-container {
+    position: absolute; /* Position relative to .parent-div */
+    top: 50%; /* Move down by 50% of parent's height */
+    left: 50%; /* Move right by 50% of parent's width */
+    transform: translate(-50%, -50%); /* Center the child div */
+    text-align: left;
+    padding: 10px; /* Inner padding */
+    width: calc(100% - 80px); /* Adjust width to account for margins */
+    max-width: 100%; /* Ensure it doesn't exceed parent's width */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    
+}
+
+.background-pic-text {
+    color: #fff5e8; /* Text color */
+    font-weight: 900;
+    font-size: 64px;    
+}
+
+/* ----------------------------------------------------------------- */
+
+.items-navigation-bar {
+    margin: 0;
+    background: #043936;
+    width: 100%;
+    height: 120px;
+    align-items: center;
+    display: flex;
+}
+
+.items-nav {
+    margin: 0;
+    max-width: 1360px;
+    height: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.nav-btn-link {
+    margin: auto 15px auto 15px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn {
+    margin: 0;
+    font-weight: 600;
+    font-size: 48px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.items-nav-search {
+    margin-right: 60px;
+    display: flex;
+}
+
+.items-nav-search-input {
+    padding-left: 24px;
+    min-width: 360px;
+    background-color: #fff;
+    color: #72757a;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: left;
+    margin-right: 24px;
+    border: none;
+    border-radius: 12px;
+}
+
+.items-nav-search-input:focus {
+    padding-left: 24px;
+    min-width: 360px;
+    background-color: #fff;
+    color: #72757a;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: left;
+    margin-right: 24px;
+    border: none;
+    border-radius: 12px;
+}
+
+.items-nav-search-btn {
+    background-color: #fff5e8;
+    border: none;
+    border-radius: 12px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.items-nav-search-btn:hover {
+    background-color: #ffeac8;
+    border: none;
+    border-radius: 12px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.items-nav-search-btn:active {
+    background-color: #ffc978;;
+    border: none;
+    border-radius: 12px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dropdown menu from here ---------------------- */
+
+.categories-dropdown { /* Background of dropdown */
+    background-color: #fff;
+    position: static;
+    display: flex;
+    padding-bottom: 36px;
+    align-content: center;
+    justify-content: center;
+}
+
+.categories-dropdown-section { /* Sections of categories (sub categories) */
+    margin: 32px 30px 0 30px;
+}
+
+.categories-dropdown-section-label { /* Sections label */
+    margin: 0 0 24px 0;
+    font-weight: 600;
+    font-size: 48px;
+    color: #01060d;
+}
+
+.categories-dropdown-section-option { /* Specific category name */
+    color: #01060d;
+    cursor: pointer;
+    margin: 0 0 12px 12px;
+    font-weight: 400;
+    font-size: 32px;
+    display: block;
+}
+
+.categories-dropdown-section-option:hover { /* Specific category name */
+    color: #01060d;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0 0 12px 12px;
+    font-weight: 400;
+    font-size: 32px;
+    display: block;
+}
