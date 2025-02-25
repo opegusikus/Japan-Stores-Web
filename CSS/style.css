@@ -114,7 +114,7 @@ button:focus {
 }
 
 .items-nav {
-    margin: 0;
+    margin: 0 0 0 30px;
     max-width: 1360px;
     height: 120px;
     display: flex;
@@ -123,9 +123,31 @@ button:focus {
 }
 
 .nav-btn-link {
-    margin: auto 15px auto 15px;
+    margin: 0 15px 0 15px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-btn-link:hover {
+    margin: 0 15px 0 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    align-items: stretch;
+    background-color: #fff5e8;
+}
+
+.nav-btn-link:hover .nav-btn{
+    color: #043936;
+}
+
+.nav-btn-container {
+    display: flex;
+    color: #fff;
+    
+    /* margin: auto 30px auto 30px;  */
 }
 
 .nav-btn {
@@ -136,6 +158,7 @@ button:focus {
     display: flex;
     align-items: center;
 }
+
 
 .items-nav-search {
     margin-right: 60px;
