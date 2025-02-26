@@ -104,6 +104,10 @@ button:focus {
 
 /* ----------------------------------------------------------------- */
 
+.navigation-section {
+    margin: 0 0 60px 0;
+}
+
 .items-navigation-bar {
     margin: 0;
     background: #043936;
@@ -233,7 +237,8 @@ button:focus {
 .categories-dropdown { /* Background of dropdown */
     background-color: #fff;
     position: static;
-    display: flex;
+    /* display: flex; */
+    display: none;
     padding-bottom: 36px;
     align-content: center;
     justify-content: center;
@@ -267,4 +272,103 @@ button:focus {
     font-weight: 400;
     font-size: 32px;
     display: block;
+}
+
+.item-container {
+    margin: 0 auto 60px auto;
+    background-color: #fff;
+    border-radius: 48px;
+    max-height: 380px;
+    max-width: 1240px;
+    padding: 60px;
+}
+
+/* Items------------------------------------------------------------ */
+
+.item-container-main-part {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer----------------------------------------------------------- */
+
+.footer {
+    display: flex;
+    background-color: #043936;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+}
+
+.footer-container {
+    /* position: relative; */
+    margin: 24px auto 24px auto;
+    width: 1320px;
+    color: #fff5e8;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* .footer-links {
+
+} */
+
+/* .footer-navigation-link {
+
+} */
+
+
+
+.footer-title {
+    position: relative;
+    font-weight: 700;
+    font-size: 64px;
+    color: #fff5e8;
+    margin: 0px auto 60px 0px;
+}
+
+
+.footer-navigation-btn {
+    
+    margin: 0px auto 24px 0;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff5e8;
+}
+
+.inquiries-container {
+    position: relative;
+    align-self: flex-end;
+    justify-self: left;
+}
+
+.inquiries-container-title {
+    font-weight: 500;
+    font-size: 32px;
+}
+
+.inquiries-info {
+    font-weight: 400;
+    font-size: 24px;
 }
