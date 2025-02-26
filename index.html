@@ -18,7 +18,7 @@
             <div class="header-navigation-box">
                 <a href="https://www.w3schools.com/html/html_links.asp" target="_blank"><p class="header-navigation-btn">Замовлення</p></a>
                 <a href="https://www.w3schools.com/html/html_links.asp" target="_blank"><p class="header-navigation-btn">Instagram</p></a>
-                <a href="https://www.w3schools.com/html/html_links.asp" target="_blank"><p class="header-navigation-btn">Про нас</p></a>
+                <a href="about.html" target="_blank"><p class="header-navigation-btn">Про нас</p></a>
             </div>
         </div>
     </header>
@@ -79,28 +79,33 @@
 <!-- Items section -->
     <section>
         <div class="item-container">
-            <div class="item-container-main-part" style="display: flex; ">
-                <div>
+            <div class="item-container-preview"> <!--flex-->
+                <div class="item-container-preview-img">
                     <img src="img/photo_2024-12-29_18-43-55.png" style="width: 270px;">
                 </div>
-                <div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <h3>Aojiru</h3>
-                        <h4>В наявності</h4>
+
+                <div class="item-container-preview-text"> <!-- Right part -->
+                    <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                        <h3 class="item-container-preview-statusBar-title">Aojiru</h3>
+                        <h4 class="item-container-preview-statusBar-status">В наявності</h4>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, 
+                    <p class="item-container-preview-s-descr"> <!-- Short description -->
+                        Lorem ipsum dolor sit amet, 
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                     </p>
                 </div>
             </div>
 
-            <div>
+
+            <div class="item-container-d-description"> <!-- Detailed description / expandable -->
                 <p>Lorem ipsum dolor sit amet, 
                     consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, 
                     consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                 </p>
             </div>
+            <!-- тут має бути кнопка expand -->
         </div>
+        
 
     </section>
 

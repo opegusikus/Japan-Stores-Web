@@ -2,6 +2,7 @@ body {
     font-family: "Montserrat", serif;
     background: #fff5e8;
     margin: 0;
+    /* min-width: 1360px; */
 }
 
 a:link, a:visited {
@@ -274,43 +275,64 @@ button:focus {
     display: block;
 }
 
+/* Items------------------------------------------------------------ */
 .item-container {
+    font-weight: 400;
+    font-size: 32px;
     margin: 0 auto 60px auto;
+    padding: 60px;
     background-color: #fff;
     border-radius: 48px;
-    max-height: 380px;
+
     max-width: 1240px;
     padding: 60px;
+    color: #01060d;
 }
 
-/* Items------------------------------------------------------------ */
+.item-container-preview {
+    display: flex; 
+}
 
-.item-container-main-part {
-    
+.item-container-preview-img {
+    max-width: 260px;
+}
+
+.item-container-preview-text {
+    margin-left: 32px;
+} 
+
+.item-container-preview-statusBar {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.item-container-preview-statusBar-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 48px;
+}
+
+.item-container-preview-statusBar-status {
+    margin: 0;
+    font-weight: 500;
+    font-size: 32px;
+    color: #043936;
+    /* color: #72757a; */
+}
+
+.item-container-preview-s-descr {
+
 }
 
 
+.item-container-d-description {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 /* Footer----------------------------------------------------------- */
 
 .footer {
+    /* position: fixed; */
     display: flex;
     background-color: #043936;
     left: 0;
@@ -337,9 +359,7 @@ button:focus {
 /* .footer-navigation-link {
 
 } */
-
-
-
+ 
 .footer-title {
     position: relative;
     font-weight: 700;
@@ -350,7 +370,6 @@ button:focus {
 
 
 .footer-navigation-btn {
-    
     margin: 0px auto 24px 0;
     font-weight: 400;
     font-size: 24px;
