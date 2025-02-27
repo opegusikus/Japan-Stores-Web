@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Stores Admin page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/style_login.css">
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header-title-box">
+                <a href="index.html" target=""><h1 class="header-title">Japan Stores</h1></a>
+            </div>
+            <div class="header-navigation-box">
+                <a href="https://www.w3schools.com/html/html_links.asp" target="_blank"><p class="header-navigation-btn">Замовлення</p></a>
+                <a href="https://www.instagram.com/japan_stores_/" target="_blank"><p class="header-navigation-btn">Instagram</p></a>
+                <a href="about.html" target=""><p class="header-navigation-btn">Про нас</p></a>
+            </div>
+        </div>
+    </header>
+    <!-- <p><input type = "text" name = "nm" /></p> -->
+
+    <form action = "http://127.0.0.1:5501/login" method = "post" class="login-form">
+        <h3 class="login-form-title">Admin Login</h3>
+        <div class="login-form-input-container">
+            <label for="user-name" name="nm" class="login-form-label">Username</label><br>
+            <input type="text" id="user-name" class="login-form-input">
+        </div>
+        <div class="login-form-input-container">
+            <label for="password" class="login-form-label">Password</label><br>
+            <input type="text" id="password" class="login-form-input">
+        </div><br>
+        <input type="submit" value="Log in" class="login-btn">
+    </form>
+</body>
+</html>

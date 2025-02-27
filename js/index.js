@@ -59,7 +59,7 @@ function displayBlock(blocks) {
             <button class="item-container-expand-btn" id="item-container-expand-btn">...</button>
         </div>
     `;
-
+    let itemsSection = document.getElementById("items-section")
     document.body.appendChild(newBlock);
 }
 
@@ -74,14 +74,16 @@ categoriesBtn.onclick = function() {
 
 function toggleBlock() {
     const container = document.querySelector("#item-container-d-description");
-    const threeDots = document.querySelector("#item-container-expand-btn");
+
 
     itemPreview.addEventListener('click', () => {
         container.classList.toggle('active');
-        threeDots.classList.toggle('active');
+
     })
 
 };
+
+
 
 itemPreview.onclick = toggleBlock();
 // document.querySelector('#test-btn').addEventListener('click', displayBlock(blocks))
