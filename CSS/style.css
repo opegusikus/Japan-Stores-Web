@@ -263,6 +263,8 @@ button:focus {
 
 /* Items------------------------------------------------------------ */
 .item-container {
+    position: relative;
+    cursor: default;
     font-weight: 400;
     font-size: 18px;
     margin: 0 auto 60px auto;
@@ -271,6 +273,8 @@ button:focus {
     border-radius: 48px;
     max-width: 768px;
     color: var(--mainBlack);
+    
+    
 }
 
 .item-container-preview {
@@ -317,7 +321,34 @@ button:focus {
 
 
 .item-container-d-description {
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
 
+.item-container-d-description.active {
+    max-height: fit-content;
+}
+
+.item-container-expand-btn {
+    /* align-self: flex-end; */
+    /* justify-self: flex-end; */
+    position: absolute;
+    margin: 0 32px 12px 0;
+    font-family: "Montserrat", serif;
+    font-weight: 600;
+    font-size: 48px;
+    background-color: transparent;
+    color: var(--nonActiveGray);
+    border: none;
+    right: 0;
+    bottom: 0%;
+    
+}
+
+.item-container-expand-btn.active {
+    right: 0;
+    bottom: 0;
 }
 
 /* Footer----------------------------------------------------------- */

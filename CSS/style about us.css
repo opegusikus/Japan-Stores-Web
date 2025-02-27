@@ -1,5 +1,5 @@
 .about-us {
-    width: 768;
+    max-width: 768px;
     height: 100%;
     text-align: center;
     padding: 10%;
