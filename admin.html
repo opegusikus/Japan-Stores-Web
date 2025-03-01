@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/style_admin.css">
 </head>
 <body>
     <header class="header">
@@ -23,20 +24,9 @@
         </div>
     </header>
 
-<!-- Front page -->
-    <section class="background-pic-section">
-        <div class="background-pic-container">
-            <img src="img/Background.jpg" alt="background picture" class="index-background-pic">
-            <!-- style="max-width:100%; height:auto" -->
-            <div class="background-pic-text-container">
-                <h2 class="background-pic-text">Краса. Догляд. Здоров'я. Товари з Японії в наявності та під замовлення. </h2>
-            </div>
-        </div>
-    </section>
-
 <!-- Navigation -->
     <section class="navigation-section">
-        <div class="items-navigation-bar" id="01">
+        <div class="items-navigation-bar" id="01" style="margin-top: 60px;">
                 <nav class="items-nav">
                     <a href="/aojiru/" class="nav-btn-link"><div class="nav-btn-container"><h3 class="nav-btn">Аоджіру</h3></div></a>
                     <a href="/other/" class="nav-btn-link"><div class="nav-btn-container"><h3 class="nav-btn">Інше</h3></div></a>
@@ -70,10 +60,15 @@
         </div>
     </section>
 
+    <section>
+        <div class="admin-add">
+            <button class="admin-btn" id="admin-add">Додати товар</button>
+        </div>
+    </section>
+
 <!-- Items section -->
     <section id="items-section">
-
-        <div class="item-container" data-block-id="1740835238140" >
+        <div class="item-container" data-block-id="1740835238140">
             <div class="item-container-onclick" onclick="toggleBlock(1740835238140)">
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     <div class="item-container-preview-img-container">
@@ -102,10 +97,10 @@
                 <!-- тут має бути кнопка expand -->
                 <button class="item-container-expand-btn">...</button>
             </div>
+            <button class="admin-btn" id="admin-edit-btn">Редагувати</button>
         </div>
-        
     </section>
-
+    <button id="test-btn">click</button>
 <!-- Footer -->
     <footer class="footer">
     <div class="footer-container">
@@ -122,6 +117,6 @@
         </div>
     </div>
     </footer>
-
+    <script src="js/index.js"></script>
 </body>
 </html>

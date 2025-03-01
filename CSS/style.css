@@ -26,6 +26,15 @@ input:focus {
     outline: none;
 }
 
+button {
+    padding: 8px;
+    font-family: "Montserrat", serif;
+    font-weight: 400;
+    border: none;
+    background-color: #fff;
+    border-radius: 12px;
+}
+
 button:focus {
     outline: none;
 }
@@ -262,13 +271,18 @@ button:focus {
 }
 
 /* Items------------------------------------------------------------ */
+.item-container-onclick {
+    margin: 0;
+    padding: 32px;
+}
+
 .item-container {
     position: relative;
     cursor: default;
     font-weight: 400;
     font-size: 18px;
     margin: 0 auto 60px auto;
-    padding: 32px;
+
     background-color: #fff;
     border-radius: 48px;
     max-width: 768px;
