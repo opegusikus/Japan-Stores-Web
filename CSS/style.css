@@ -237,8 +237,8 @@ button:focus {
 .categories-dropdown { /* Background of dropdown */
     background-color: #fff;
     position: static;
-    /* display: flex; */
-    display: none;
+    /* display: none; */
+    
     padding-bottom: 36px;
     align-content: center;
     justify-content: center;
@@ -293,6 +293,7 @@ button:focus {
 
 .item-container-preview {
     display: flex; 
+    
 }
 
 /* .item-container-preview-img-container {
@@ -306,12 +307,13 @@ button:focus {
 
 .item-container-preview-text {
     margin-left: 32px;
+    width: 100%;
 } 
 
 .item-container-preview-statusBar {
     display: flex; 
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .item-container-preview-statusBar-title {

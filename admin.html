@@ -39,7 +39,7 @@
                   </svg></button>
             </div>
         </div>
-        <div class="categories-dropdown" id="categories-dropdown">
+        <div class="categories-dropdown" id="categories-dropdown" style="display: none;">
             <div class="categories-dropdown-section">
                 <h3 class="categories-dropdown-section-label">Health</h3>
                 <a href="/category/" class="categories-dropdown-section-option">• Lorem ipsum dolor sit amet</a>
@@ -70,6 +70,41 @@
     <section id="items-section">
         <div class="item-container" data-block-id="1740835238140">
             <div class="item-container-onclick" onclick="toggleBlock(1740835238140)">
+                <p>ID: 1740835238140</p>
+                <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+                    <div class="item-container-preview-img-container">
+                        <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img">
+                    </div>
+
+                    <div class="item-container-preview-text"> <!-- Right part -->
+                        <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                            <h3 class="item-container-preview-statusBar-title">Aojiru</h3>
+                            <h4 class="item-container-preview-statusBar-status">В наявності</h4>
+                        </div>
+                        <p class="item-container-preview-s-descr"> <!-- Short description -->
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="item-container-d-description" id="item-container-d-description"> <!-- Detailed description / expandable -->
+                    <p>Lorem ipsum dolor sit amet, 
+                        consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, 
+                        consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
+                    </p>
+                </div>
+                <!-- тут має бути кнопка expand -->
+                <button class="item-container-expand-btn">...</button>
+            </div>
+            <button class="admin-btn" id="admin-edit-btn">Редагувати</button>
+        </div>
+
+        <!-- Створення/редагування -->
+        <div class="item-container" data-block-id="1740835238141">
+            <div class="item-container-onclick" onclick="toggleBlock(1740835238141)">
+                <p>ID: 1740835238140</p>
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     <div class="item-container-preview-img-container">
                         <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img">

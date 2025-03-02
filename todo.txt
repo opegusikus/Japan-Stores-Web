@@ -1,1 +1,2 @@
-jsutify contents: space-between is not working for newly created elemnts
+jsutify contents: space-between is not working for newly created elemnts - FIXED
+Continue admin page and other pages

@@ -43,6 +43,7 @@ function createBlock() {
 
     newBlock.innerHTML = `
         <div class="item-container-onclick" onclick="toggleBlock(${id})">
+            <p>ID: ${id}</p>
             <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                 <div class="item-container-preview-img-container">
                     <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img">
@@ -61,13 +62,14 @@ function createBlock() {
 
 
             <div class="item-container-d-description" id="item-container-d-description"> <!-- Detailed description / expandable -->
-                <p>${mainDescr}
+                <p>
+                    ${mainDescr}
                 </p>
             </div>
             <!-- тут має бути кнопка expand -->
             <button class="item-container-expand-btn">...</button>
         </div>
-        <button class="admin-btn" id="admin-edit-btn">Редагувати</button>
+        <button class="admin-btn">Редагувати</button>
     `;
 
 
@@ -77,29 +79,46 @@ function createBlock() {
     const preview = newBlock.querySelector('.item-container-preview');
     const detailed = newBlock.querySelector('.item-container-d-description');
 }
-createBlock();
-document.querySelector('#test-btn').addEventListener('click', createBlock);
+// createBlock();
+document.querySelector('#admin-add').addEventListener('click', createBlock);
 
-categoriesBtn.onclick = function() {
-    if (categoriesPage.style.display === "none") {
-        categoriesPage.style.display = "flex";
-    }
-    else {
-        categoriesPage.style.display = "none";
-    }
-}
-
-
-
-// function toggleBlock() {
-//     const container = document.querySelector("#item-container-d-description");
-//     itemPreview.addEventListener('click', () => {
-//         container.classList.toggle('active');
-
-//     })
+// Це теж наче як працює
+// categoriesBtn.onclick = function() {
+//     if (categoriesPage.style.display === "none") {
+//         categoriesPage.style.display = "flex";
+//     }
+//     else {
+//         categoriesPage.style.display = "none";
+//     }
 // };
 
-// Add click event listener to the header
+// це фігзна шо
+//  function toggleBlock() {
+//     const container = document.querySelector("#item-container-d-description");
+//     itemPreview.addEventListener('click', () => {
+//          container.classList.toggle('active');
+
+//     })
+//  };
+
+// Set up existing blocks (if any)
+document.querySelectorAll('.item-container-onclick').forEach(preview => {
+    const content = preview.nextElementSibling;
+    preview.addEventListener('click', () => {
+        content.classList.toggle('active');
+    });
+});
+
+// Close blocks when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.item-container')) {
+        document.querySelectorAll('.item-container-d-description').forEach(content => {
+            content.classList.remove('active');
+        });
+    }
+});
+
+// Add click event listener to created preview
 function toggleBlock(id) {
     const block = document.querySelector(`[data-block-id="${id}"]`);
     console.log(id);
@@ -108,20 +127,59 @@ function toggleBlock(id) {
     console.log(block.name);
 }
 
-// // Set up existing blocks (if any)
-// document.querySelectorAll('.block-header').forEach(header => {
-//     const content = header.nextElementSibling;
-//     header.addEventListener('click', () => {
-//         content.classList.toggle('active');
-//     });
-// });
 
-// // Close blocks when clicking outside
-// document.addEventListener('click', (e) => {
-//     if (!e.target.closest('.block')) {
-//         document.querySelectorAll('.block-content').forEach(content => {
-//             content.classList.remove('active');
-//         });
-//     }
-// });
+// Ще один спосіб стоврити блок товару
 
+function createBlockOption2() {
+    let itemsSection = document.getElementById("items-section")
+
+    const newBlock = document.createElement('div');
+    newBlock.className = 'item-container';
+    
+
+    const id = Date.now().toString();   // Assign a unique ID for reference
+    newBlock.dataset.blockId = id;
+
+    newBlock.innerHTML = `
+        <div class="item-container-onclick" onclick="toggleBlock(${id})">
+            <p>ID: ${id}</p>
+            <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+                <div class="item-container-preview-img-container">
+                    <input type='file' /><br>
+                    <img src="" class="item-container-preview-img">
+                </div>
+
+                <div class="item-container-preview-text"> <!-- Right part -->
+                    <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                        <h3 class="item-container-preview-statusBar-title"><input type="text" id="blockName"></h3>
+                        <h4 class="item-container-preview-statusBar-status">В наявності</h4>
+                    </div>
+                    <p class="item-container-preview-s-descr"> <!-- Short description -->
+                        <textarea name="message" rows="10" cols="30" id="previewDescr"></textarea>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
+                <p>
+                    <textarea name="message" rows="10" cols="30" id="mainDescr"></textarea>
+                </p>
+            </div>
+            <!-- тут має бути кнопка expand -->
+            <button class="item-container-expand-btn">...</button>
+        </div>
+        <button class="admin-btn">Зберегти</button>
+        <button class="admin-btn">Редагувати</button>
+        <button class="admin-btn">Атмєна</button>
+    `;
+
+
+    // let itemsSection = document.getElementById("items-section")
+    itemsSection.appendChild(newBlock);
+    // Get the header and content elements of the new block
+    const preview = newBlock.querySelector('.item-container-preview');
+    const detailed = newBlock.querySelector('.item-container-d-description');
+}
+// createBlock();
+document.querySelector('#test-btn').addEventListener('click', createBlockOption2);
