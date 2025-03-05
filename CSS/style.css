@@ -237,7 +237,7 @@ button:focus {
 .categories-dropdown { /* Background of dropdown */
     background-color: #fff;
     position: static;
-    /* display: none; */
+    display: none;
     
     padding-bottom: 36px;
     align-content: center;
@@ -329,6 +329,7 @@ button:focus {
     font-weight: 500;
     color: var(--mainGreen);
     /* color: #72757a; */
+    white-space: nowrap;
 }
 
 /* .item-container-preview-s-descr {

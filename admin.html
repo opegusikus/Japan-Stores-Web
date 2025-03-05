@@ -68,6 +68,48 @@
 
 <!-- Items section -->
     <section id="items-section">
+        <!-- Створення/редагування -->
+        <div class="item-container" id="creation-block">
+            <div class="item-container-onclick">
+                <div style="display:flex; align-items:center; justify-content:space-evenly; margin:0">
+                    <p>ID: creation</p><select>
+                    <option>health</option>
+                    <option>beauty</option>
+                    </select>
+                    <input type='file' class="img-input" id="creation-input-file" />
+                </div>
+                    <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+                        <div class="item-container-preview-img-container">
+                            <img src="img/js product img.png" class="item-container-preview-img" id="creation-img-src">
+                        </div>
+        
+                        <div class="item-container-preview-text"> <!-- Right part -->
+                            <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                                <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
+                                <h4 class="item-container-preview-statusBar-status">
+                                    <select class="item-container-preview-statusBar-status" name="status" id="status">
+                                        <option value="available">В наявності</option>
+                                        <option value="not-available">Немає в наявності</option>
+                                    </select>
+                                </h4>
+                            </div>
+                            <p class="item-container-preview-s-descr"> <!-- Short description -->
+                                <textarea class="description-input preview-input" name="previewDescr" id="previewDescr"></textarea>
+                            </p>
+                        </div>
+                    </div>
+        
+                    <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
+                        <p>
+                            <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea>
+                        </p> <!-- rows="20" cols="70" -->
+                    </div>
+                    <!-- тут має бути кнопка expand -->
+                    <button class="item-container-expand-btn">...</button>
+                </div>
+                <button class="admin-btn" id="save-creation-btn">Зберегти</button>
+                <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>
+            </div>
         <div class="item-container" data-block-id="1740835238140">
             <div class="item-container-onclick" onclick="toggleBlock(1740835238140)">
                 <p>ID: 1740835238140</p>
@@ -100,8 +142,6 @@
             </div>
             <button class="admin-btn" id="admin-edit-btn">Редагувати</button>
         </div>
-
-        <!-- Створення/редагування -->
         <div class="item-container" data-block-id="1740835238141">
             <div class="item-container-onclick" onclick="toggleBlock(1740835238141)">
                 <p>ID: 1740835238140</p>
