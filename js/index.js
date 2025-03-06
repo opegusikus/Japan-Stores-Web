@@ -1,3 +1,4 @@
+let creationBlock = document.getElementById("creation-block");
 let categoriesBtn = document.querySelector("#nav-btn-link-categories");
 let categoriesPage = document.querySelector("#categories-dropdown");
 let itemPreview = document.querySelector("#item-container");
@@ -81,10 +82,21 @@ function createBlock() {
     // Get the header and content elements of the new block
     const preview = newBlock.querySelector('.item-container-preview');
     const detailed = newBlock.querySelector('.item-container-d-description');
+    creationBlock.style.display = "none"
 }
 // createBlock();
 
-document.querySelector('#admin-add').addEventListener('click', createBlock);
+document.querySelector('#save-creation-btn').addEventListener('click', createBlock);
+
+// Відкриття блоку для створення товару 
+document.querySelector('#admin-add').onclick = function() {
+    creationBlock.style.display = "block";
+};
+
+//Відміна створення товару
+document.querySelector("#cancel-creation-btn").onclick = function() {
+    creationBlock.style.display = "none"
+}
 
 // Відкриття категорій
 categoriesBtn.onclick = function() {
@@ -131,6 +143,25 @@ function toggleBlock(id) {
     content.classList.toggle('active');
     console.log(block.name);
 }
+
+//Прев'ю картинки
+var img = document.querySelector('#creation-img-src');
+window.addEventListener('load', function() {
+    document.querySelector('#creation-input-file').addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+        }
+    });
+});
+
+function editBlock() {
+    
+};
+
+
+
+
+
 
 
 // Ще один спосіб стоврити блок товару
@@ -209,14 +240,3 @@ function toggleBlock(id) {
 // // createBlockOption2();
 // document.querySelector('#admin-add').addEventListener('click', createBlockOption2);
 // // document.getElementById('save-creation-btn').addEventListener('click', createBlock);
-
-
-
-var img = document.querySelector('#creation-img-src');
-window.addEventListener('load', function() {
-    document.querySelector('#creation-input-file').addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-        }
-    });
-});

@@ -60,6 +60,6 @@ option {
 }
 
 #creation-block {
-    display: block;
-    /* display: none; */
+    /* display: block; */
+    display: none;
 }
