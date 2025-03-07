@@ -73,8 +73,9 @@
 <!-- Items section -->
     <section id="items-section">
 
-        <div class="item-container" data-block-id="1740835238140" >
-            <div class="item-container-onclick" onclick="toggleBlock(1740835238140)">
+        <div class="item-container" data-block-id="1740835238140">
+            <div class="item-container-onclick" onclick="addBlock(1740835238140)">
+                <p>ID: 1740835238140</p>
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     <div class="item-container-preview-img-container">
                         <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img">
@@ -100,8 +101,9 @@
                     </p>
                 </div>
                 <!-- тут має бути кнопка expand -->
-                <button class="item-container-expand-btn">...</button>
+                
             </div>
+            <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="removeBlock(1740835238140)">...</button>
         </div>
         
     </section>

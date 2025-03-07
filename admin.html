@@ -71,12 +71,17 @@
         <!-- Створення/редагування -->
         <div class="item-container" id="creation-block">
             <div class="item-container-onclick">
-                <div style="display:flex; align-items:center; justify-content:space-evenly; margin:0">
-                    <p>ID: creation</p><select>
-                    <option>health</option>
-                    <option>beauty</option>
+                <div class="item-edit-dropdowns">
+                    <p>ID: creation</p>
+                    <select class="item-container-preview-statusBar-status" name="mainCategory">
+                        <option>health</option>
+                        <option>beauty</option>
                     </select>
-                    <input type='file' class="img-input" id="creation-input-file" />
+                    <select class="item-container-preview-statusBar-status" name="subCategory">
+                        <option>creame</option>
+                        <option>powder</option>
+                    </select>
+                    <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
                 </div>
                     <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                         <div class="item-container-preview-img-container">
@@ -88,8 +93,8 @@
                                 <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
                                 <h4 class="item-container-preview-statusBar-status">
                                     <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                        <option value="available">В наявності</option>
-                                        <option value="not-available">Немає в наявності</option>
+                                        <option value="true">В наявності</option>
+                                        <option value="false">Немає в наявності</option>
                                     </select>
                                 </h4>
                             </div>
@@ -102,34 +107,35 @@
                     <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
                         <p>
                             <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea>
-                        </p> <!-- rows="20" cols="70" -->
+                        </p>
                     </div>
-                    <!-- тут має бути кнопка expand -->
-                    <button class="item-container-expand-btn">...</button>
+                    <button class="item-container-expand-btn" id="item-container-expand-btn">...</button>
             </div>
             <button class="admin-btn" id="save-creation-btn">Зберегти</button>
             <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>
         </div>
+
+        <!-- Item 1 -->
         <div class="item-container" data-block-id="1740835238140">
-            <div class="item-container-onclick" onclick="toggleBlock(1740835238140)">
-                <p>ID: 1740835238140</p>
+            <div class="item-container-onclick" onclick="addBlock(1740835238140)">
+                <p id="item-id">ID: 1740835238140</p>
+                <!-- dropdown edit partially completed -->
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     <div class="item-container-preview-img-container">
-                        <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img">
+                        <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img" id="creation-img-src">
                     </div>
 
                     <div class="item-container-preview-text"> <!-- Right part -->
                         <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                             <h3 class="item-container-preview-statusBar-title">Aojiru</h3>
-                            <h4 class="item-container-preview-statusBar-status">В наявності</h4>
+                            <h4 class="item-container-preview-statusBar-status" id="status">В наявності</h4>
                         </div>
-                        <p class="item-container-preview-s-descr"> <!-- Short description -->
+                        <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
                             Lorem ipsum dolor sit amet, 
                             consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                         </p>
                     </div>
                 </div>
-
 
                 <div class="item-container-d-description" id="item-container-d-description"> <!-- Detailed description / expandable -->
                     <p>Lorem ipsum dolor sit amet, 
@@ -137,31 +143,32 @@
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                     </p>
                 </div>
-                <!-- тут має бути кнопка expand -->
-                <button class="item-container-expand-btn">...</button>
             </div>
-            <button class="admin-btn" id="admin-edit-btn">Редагувати</button>
+            <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="removeBlock(1740835238140)">...</button>
+            <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(1740835238140)">Редагувати</button>
         </div>
+
+        <!-- Item 2 -->
         <div class="item-container" data-block-id="1740835238141">
-            <div class="item-container-onclick" onclick="toggleBlock(1740835238141)">
-                <p>ID: 1740835238140</p>
+            <div class="item-container-onclick" onclick="addBlock(1740835238141)">
+                <p id="item-id">ID: 1740835238141</p>
+                <!-- dropdown edit partially completed -->
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     <div class="item-container-preview-img-container">
-                        <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img">
+                        <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img" id="creation-img-src">
                     </div>
 
                     <div class="item-container-preview-text"> <!-- Right part -->
                         <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                             <h3 class="item-container-preview-statusBar-title">Aojiru</h3>
-                            <h4 class="item-container-preview-statusBar-status">В наявності</h4>
+                            <h4 class="item-container-preview-statusBar-status" id="status">В наявності</h4>
                         </div>
-                        <p class="item-container-preview-s-descr"> <!-- Short description -->
+                        <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
                             Lorem ipsum dolor sit amet, 
                             consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                         </p>
                     </div>
                 </div>
-
 
                 <div class="item-container-d-description" id="item-container-d-description"> <!-- Detailed description / expandable -->
                     <p>Lorem ipsum dolor sit amet, 
@@ -169,13 +176,12 @@
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                     </p>
                 </div>
-                <!-- тут має бути кнопка expand -->
-                <button class="item-container-expand-btn">...</button>
             </div>
-            <button class="admin-btn" id="admin-edit-btn">Редагувати</button>
+            <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="removeBlock(1740835238141)">...</button>
+            <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(1740835238141)">Редагувати</button>
         </div>
     </section>
-    <button id="test-btn">click</button>
+    <!-- <button id="test-btn">click</button> -->
 <!-- Footer -->
     <footer class="footer">
     <div class="footer-container">

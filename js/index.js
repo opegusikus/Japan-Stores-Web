@@ -19,10 +19,22 @@ let blocksCreation = [];
 function createBlock() {
     // createBlockOption2();
     let itemsSection = document.getElementById("items-section")
-    let state = true;
+    let imgLink = document.querySelector('.item-container-preview-img').src;
     let blockName = document.getElementById("blockName").value;
+    let category;
+    let state = (document.getElementById('status').value === 'true');
+    let availability;
     let previewDescr = document.getElementById("previewDescr").value;
     let mainDescr = document.getElementById("mainDescr").value;
+    
+    if (state == true) {
+        availability = 'В наявності';
+    }
+    else {
+        availability = 'Немає в наявності';
+    }
+
+    console.log(imgLink);
     // blockName = window.prompt("please enter the name");
     // blockName = String(blockName)
 
@@ -37,8 +49,10 @@ function createBlock() {
 
     blocks.push({
         id: id,
-        name: blockName,
         element: newBlock,
+        categorie: category,
+        img: imgLink,
+        name: blockName,
         state: state, 
         previewDescriprion: previewDescr,
         mainDescription: mainDescr
@@ -46,7 +60,7 @@ function createBlock() {
     console.log(blocks)
 
     newBlock.innerHTML = `
-        <div class="item-container-onclick" onclick="toggleBlock(${id})">
+        <div class="item-container-onclick" onclick="addBlock(${id})">
             <p>ID: ${id}</p>
             <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                 <div class="item-container-preview-img-container">
@@ -56,7 +70,7 @@ function createBlock() {
                 <div class="item-container-preview-text"> <!-- Right part -->
                     <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                         <h3 class="item-container-preview-statusBar-title">${blockName}</h3>
-                        <h4 class="item-container-preview-statusBar-status">В наявності</h4>
+                        <h4 class="item-container-preview-statusBar-status">${availability}</h4>
                     </div>
                     <p class="item-container-preview-s-descr"> <!-- Short description -->
                         ${previewDescr}
@@ -73,7 +87,8 @@ function createBlock() {
             <!-- тут має бути кнопка expand -->
             <button class="item-container-expand-btn">...</button>
         </div>
-        <button class="admin-btn">Редагувати</button>
+        <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="removeBlock(${id})">...</button>
+        <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${id})">Редагувати</button>
     `;
 
 
@@ -83,10 +98,11 @@ function createBlock() {
     const preview = newBlock.querySelector('.item-container-preview');
     const detailed = newBlock.querySelector('.item-container-d-description');
     creationBlock.style.display = "none"
+    delete imgLink;
 }
 // createBlock();
 
-document.querySelector('#save-creation-btn').addEventListener('click', createBlock);
+document.getElementById('save-creation-btn').addEventListener('click', createBlock);
 
 // Відкриття блоку для створення товару 
 document.querySelector('#admin-add').onclick = function() {
@@ -109,22 +125,14 @@ categoriesBtn.onclick = function() {
 };
 
 
-// це фігзна шо
-//  function toggleBlock() {
-//     const container = document.querySelector("#item-container-d-description");
-//     itemPreview.addEventListener('click', () => {
-//          container.classList.toggle('active');
 
-//     })
-//  };
-
-// Set up existing blocks (if any)
-document.querySelectorAll('.item-container-onclick').forEach(preview => {
-    const content = preview.nextElementSibling;
-    preview.addEventListener('click', () => {
-        content.classList.toggle('active');
-    });
-});
+// Set up existing blocks (if any) for extention
+// document.querySelectorAll('.item-container-onclick').forEach(preview => {
+//     const content = preview.nextElementSibling;
+//     preview.addEventListener('click', () => {
+//         content.classList.toggle('active');
+//     });
+// });
 
 // Close blocks when clicking outside
 document.addEventListener('click', (e) => {
@@ -135,28 +143,105 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Add click event listener to created preview
-function toggleBlock(id) {
+// Add click event listener to created preview for extention
+function addBlock(id) {
+    const block = document.querySelector(`[data-block-id="${id}"]`);
+    const content = block.querySelector('.item-container-d-description');
+    if (!content.classList.contains('active')) {
+        // console.log(id);
+        content.classList.add('active');
+        // console.log(block.name);
+    }
+}
+
+//remove extention
+function removeBlock(id) {
     const block = document.querySelector(`[data-block-id="${id}"]`);
     console.log(id);
     const content = block.querySelector('.item-container-d-description');
-    content.classList.toggle('active');
+    content.classList.remove('active');
     console.log(block.name);
 }
 
+
+
 //Прев'ю картинки
-var img = document.querySelector('#creation-img-src');
-window.addEventListener('load', function() {
-    document.querySelector('#creation-input-file').addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+// var img = document.querySelector('#creation-img-src');
+//     window.addEventListener('load', function() {
+//     document.querySelector('#creation-input-file').addEventListener('change', function() {
+//         if (this.files && this.files[0]) {
+//             img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+//         }
+//     });
+// });
+
+
+function editBlock(id) {
+    const itemBlock = document.querySelector(`[data-block-id="${id}"]`);
+    // console.log(itemBlock);
+    const parentAddDropdowns = itemBlock.getElementsByClassName("item-container-onclick");
+    // console.log(parentAddDropdowns);
+    let img = itemBlock.getElementsByClassName("item-container-preview-img");
+    let itemBlockName = itemBlock.getElementsByClassName("item-container-preview-statusBar-title").value;
+    let category;
+    let state = itemBlock.querySelector('#status').value;
+    console.log(state);
+    let availability;
+    let previewDescr = itemBlock.querySelector("#item-container-s-description").value;
+    let mainDescr = itemBlock.querySelector("#item-container-d-description").value;
+
+    if (state == 'В наявності') {
+        availability = true;
+    }
+    else {
+        availability = false;
+    }
+
+    const addDropdowns = document.createElement('div');
+    addDropdowns.className = 'item-edit-dropdowns';
+
+    itemBlock.querySelector('#item-id').remove();
+
+    addDropdowns.innerHTML = `
+        <p>ID: ${id}</p>
+        <select class="item-container-preview-statusBar-status" name="mainCategory">
+            <option>health</option>
+            <option>beauty</option>
+        </select>
+        <select class="item-container-preview-statusBar-status" name="subCategory">
+            <option>creame</option>
+            <option>powder</option>
+        </select>
+    `;
+    parentAddDropdowns[0].insertBefore(addDropdowns, parentAddDropdowns[0].firstChild);
+
+    //create input
+    let input = document.createElement("input");
+    input.type = "file";
+    input.classList.add("img-input");
+    input.accept = "image/*";
+
+    itemBlock.querySelector('.item-edit-dropdowns').appendChild(input);
+    input.addEventListener("change", function(event) {
+        let file = event.target.files[0]; // Get the selected file
+
+        if (file) {
+            let reader = new FileReader();
+
+            // On file load, update the image in the specific block
+            reader.onload = function(e) {
+                let parentBlock = event.target.closest('.item-container'); // Find the parent div (block)
+                let imageDisplay = parentBlock.querySelector('#creation-img-src'); // The image inside the block
+
+                // Replace the image source with the new image
+                imageDisplay.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
         }
     });
-});
-
-function editBlock() {
-    
 };
+
 
 
 
