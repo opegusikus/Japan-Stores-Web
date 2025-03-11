@@ -23,12 +23,12 @@ function createBlock() {
     let imgLink = document.querySelector('.item-container-preview-img').src;
     let blockName = document.getElementById("blockName").value;
     let category;
-    let state = (document.getElementById('status').value === 'true');
+    let status = (document.getElementById('status').value === 'true');
     let availability;
     let previewDescr = document.getElementById("previewDescr").value;
     let mainDescr = document.getElementById("mainDescr").value;
     
-    if (state == true) {
+    if (status == true) {
         availability = 'В наявності';
     }
     else {
@@ -54,7 +54,7 @@ function createBlock() {
         categorie: category,
         img: imgLink,
         name: blockName,
-        state: state, 
+        status: status, 
         previewDescriprion: previewDescr,
         mainDescription: mainDescr
     });
@@ -65,7 +65,7 @@ function createBlock() {
             <p>ID: ${id}</p>
             <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                 <div class="item-container-preview-img-container">
-                    <img src="${img.src}" class="item-container-preview-img">
+                    <img src="${imgLink}" class="item-container-preview-img">
                 </div>
 
                 <div class="item-container-preview-text"> <!-- Right part -->
@@ -138,7 +138,7 @@ categoriesBtn.onclick = function() {
 // Close blocks when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.item-container') && editMode === false) {
-        document.querySelectorAll('.item-container-d-description').forEach(content => {
+        document.querySelectorAll('.item-container-d-description').forEach(content => {//може кудись сюди дописати іф який чекатиме чи редагується цей блок
             content.classList.remove('active');
         });
     }
@@ -177,21 +177,18 @@ function editBlock(id) {
     let img = itemBlock.getElementsByClassName("item-container-preview-img");
     let itemBlockName = itemBlock.getElementsByClassName("item-container-preview-statusBar-title").textContent;
     let category;
-    let state = itemBlock.querySelector('#status').textContent;
-    console.log(state);
-    let availability;
-    let previewDescr = itemBlock.querySelector("#item-container-s-description").textContent;
-    let mainDescr = itemBlock.querySelector("#item-container-d-description").textContent;
     let editBtn = itemBlock.querySelector("#admin-edit-btn");
+
+    let expantionContainer = itemBlock.querySelector('.item-container-onclick');
+    expantionContainer.onclick = null;
+    let shrinkBtn = itemBlock.querySelector('#item-container-expand-btn');
+    shrinkBtn.onclick = null;
+    console.log(expantionContainer);
+
 
     editBtn.style.display = 'none';
 
-    if (state == 'В наявності') {
-        availability = true;
-    }
-    else {
-        availability = false;
-    }
+
 
     const addDropdowns = document.createElement('div');
     addDropdowns.className = 'item-edit-dropdowns';
@@ -238,20 +235,79 @@ function editBlock(id) {
     });
 
 
-    let currentNameBlock = itemBlock.querySelector(`.item-container-preview-statusBar-title`);
-    let currentName = currentNameBlock.textContent;
-    currentNameBlock.innerHTML = '';
-    let newName = document.createElement("input");
-    newName.classList.add("preview-title");
-    newName.type = "text";
-    newName.id = "blockName";
-    newName.value = currentName;
-    // newName.innerHTML = `
-    // ${currentName}
-    // `
+    let currentStatusBar = itemBlock.querySelector(`.item-container-preview-statusBar`);
+    let currentName = itemBlock.querySelector(`.item-container-preview-statusBar-title`).textContent;
+    itemBlock.querySelector(`.item-container-preview-statusBar-title`).innerHTML = `
+    <input class="preview-title" type="text" id="blockName">
+    `;
 
-    currentNameBlock.appendChild(newName);
+    itemBlock.querySelector('#blockName').value = currentName;
 
+    let statusContainer = itemBlock.querySelector(`#status`);
+    let currentStatus = statusContainer.textContent;
+    let availability;
+
+    if (currentStatus == 'В наявності') {
+        availability = true;
+    }
+    else {
+        availability = false;
+    }
+
+
+    statusContainer.innerHTML = `
+        <select class="item-container-preview-statusBar-status" name="status" id="status">
+            <option value="true">В наявності</option>
+            <option value="false">Немає в наявності</option>
+        </select>
+    `;
+
+    let currentPreview = itemBlock.querySelector('.item-container-preview-s-descr');
+    let currentPreviewText = currentPreview.textContent.replace(/\s+/g, " ").trim();
+    // console.log(currentPreviewText);
+
+    currentPreview.innerHTML = `
+    <textarea class="description-input preview-input" name="previewDescr" id="previewDescr"></textarea>
+    `
+    itemBlock.querySelector('#previewDescr').value = currentPreviewText;
+
+    let currentMainDescr = itemBlock.querySelector('#item-container-d-description-p');
+    let currentMainDescrText = currentMainDescr.textContent.replace(/\s+/g, " ").trim();
+    // console.log(currentMainDescr);
+
+    currentMainDescr.innerHTML = `
+    <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea>
+    `
+    itemBlock.querySelector('#mainDescr').value = currentMainDescrText;
+
+
+    let saveBtn = document.createElement('button');//Save
+    saveBtn.id = 'admin-save-btn';
+    saveBtn.classList.add('admin-btn');
+    saveBtn.textContent = 'Зберегти';
+    saveBtn.onclick = function() {
+        // shrinkBtn.addEventListener("click", removeBlock);
+        alert('saved!')
+    }
+    itemBlock.appendChild(saveBtn);
+
+    let delBtn = document.createElement('button');//delete
+    delBtn.id = 'admin-del-btn';
+    delBtn.classList.add('admin-btn');
+    delBtn.textContent = 'Видалити товар';
+    delBtn.onclick = function() {
+        alert('Deleted!')
+    }
+    itemBlock.appendChild(delBtn);
+
+    let cancelEditBtn = document.createElement('button');//cancel
+    cancelEditBtn.id = 'admin-cancelEdit-btn';
+    cancelEditBtn.classList.add('admin-btn');
+    cancelEditBtn.textContent = 'Атмєна';
+    cancelEditBtn.onclick = function() {
+        alert('canceled!')
+    }
+    itemBlock.appendChild(cancelEditBtn);
 };
 
 
