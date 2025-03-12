@@ -12,7 +12,7 @@
 }
 
 .description-input {
-    margin: 0;
+    /* margin: 0; */
     font-weight: var(--standart-fontWeight);
     font-size: var(--standart-fontSize);
     width: 100%;
@@ -46,5 +46,8 @@ option {
 }
 
 .item-edit-dropdowns {
-    display:flex; align-items:center; justify-content:space-evenly; margin:0
+    display:flex; 
+    align-items:center; 
+    justify-content:space-evenly; 
+    margin-bottom: 8px;
 }
