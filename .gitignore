@@ -1,0 +1,5 @@
+# ignore venv directory
+
+venv
+
+todo.txt

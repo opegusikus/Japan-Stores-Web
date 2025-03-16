@@ -1,0 +1,20 @@
+.about-us {
+    max-width: 768px;
+    height: 100%;
+    text-align: center;
+    padding: 10%;
+    align-items: center;
+    margin: auto;
+}
+
+.about-us-title {
+    margin: 0 auto 60 auto;
+}
+
+.about-us-mainText {
+    margin: 0;
+}
+
+.footer {
+    position: fixed;
+}
