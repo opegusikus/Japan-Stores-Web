@@ -32,8 +32,7 @@ let blocks = [
 // }
 
 //image upload and refresh
-
-function displayItems() {
+function displayItems() { 
     let itemsSection = document.getElementById("items-section");
     
 
@@ -296,7 +295,6 @@ function editBlock(id) {
     content.classList.add('active');
     const parentAddDropdowns = itemBlock.getElementsByClassName("item-container-onclick");
 
-    let img = itemBlock.getElementsByClassName("item-container-preview-img");
     let itemBlockName = itemBlock.getElementsByClassName("item-container-preview-statusBar-title").textContent;
     let category;
     let editBtn = itemBlock.querySelector("#admin-edit-btn");
@@ -312,7 +310,9 @@ function editBlock(id) {
 
     //create input
     let input = itemBlock.querySelector('#creation-input-file');
-    // console.log(input);
+    let imgContainer = itemBlock.querySelector("#creation-img-src");
+    let initialImg = imgContainer.src;
+    console.log(initialImg);
     input.addEventListener("change", function(event) {
         let file = event.target.files[0]; // Get the selected file
 
@@ -377,6 +377,10 @@ function editBlock(id) {
     saveBtn.classList.add('admin-btn');
     saveBtn.textContent = 'Зберегти';
     saveBtn.onclick = function() {
+        
+
+
+
         editMode = false;
         const index = blocks.findIndex()
         alert('saved!');
@@ -400,6 +404,7 @@ function editBlock(id) {
     cancelEditBtn.textContent = 'Атмєна';
     cancelEditBtn.onclick = function() {
         dropdowns.style.display = 'none';//dropdowns
+        imgContainer.src = initialImg;
         nameEditInput.value = currentName;//name
         currentNameBlock.style.display = 'block';
         nameEditBlock.style.display = 'none';
