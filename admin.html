@@ -67,56 +67,57 @@
     </section>
 
 <!-- Items section -->
-    <section id="items-section">
-        <!-- Створення/редагування -->
-        <div class="item-container" id="creation-block">
-            <div class="item-container-onclick">
-                <div class="item-edit-dropdowns">
-                    <p>ID: creation</p>
-                    <select class="item-container-preview-statusBar-status" name="mainCategory">
-                        <option>health</option>
-                        <option>beauty</option>
-                    </select>
-                    <select class="item-container-preview-statusBar-status" name="subCategory">
-                        <option>creame</option>
-                        <option>powder</option>
-                    </select>
-                    <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
-                </div>
-                    <div class="item-container-preview" id="item-container-preview"> <!--flex-->
-                        <div class="item-container-preview-img-container">
-                            <img src="img/js product img.png" class="item-container-preview-img" id="creation-img-src">
-                        </div>
-        
-                        <div class="item-container-preview-text"> <!-- Right part -->
-                            <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
-                                <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
-                                <h4 class="item-container-preview-statusBar-status">
-                                    <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                        <option value="true">В наявності</option>
-                                        <option value="false">Немає в наявності</option>
-                                    </select>
-                                </h4>
-                            </div>
-                            <p class="item-container-preview-s-descr"> <!-- Short description -->
-                                <textarea class="description-input preview-input" name="previewDescr" id="previewDescr"></textarea>
-                            </p>
-                        </div>
-                    </div>
-        
-                    <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
-                        <p>
-                            <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea>
-                        </p>
-                    </div>
-                    <button class="item-container-expand-btn" id="item-container-expand-btn">...</button>
-            </div>
-            <button class="admin-btn" id="save-creation-btn">Зберегти</button>
-            <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>
+ <!-- Створення/редагування -->
+ <div class="item-container" id="creation-block">
+    <div class="item-container-onclick">
+        <div class="item-edit-dropdowns">
+            <p>ID: creation</p>
+            <select class="item-container-preview-statusBar-status" name="mainCategory">
+                <option>health</option>
+                <option>beauty</option>
+            </select>
+            <select class="item-container-preview-statusBar-status" name="subCategory">
+                <option>creame</option>
+                <option>powder</option>
+            </select>
+            <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
         </div>
+            <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+                <div class="item-container-preview-img-container">
+                    <img src="img/js product img.png" class="item-container-preview-img" id="creation-img-src">
+                </div>
+
+                <div class="item-container-preview-text"> <!-- Right part -->
+                    <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                        <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
+                        <h4 class="item-container-preview-statusBar-status">
+                            <select class="item-container-preview-statusBar-status" name="status" id="status">
+                                <option value="true">В наявності</option>
+                                <option value="false">Немає в наявності</option>
+                            </select>
+                        </h4>
+                    </div>
+                    <p class="item-container-preview-s-descr"> <!-- Short description -->
+                        <textarea class="description-input preview-input" name="previewDescr" id="previewDescr"></textarea>
+                    </p>
+                </div>
+            </div>
+
+            <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
+                <p>
+                    <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea>
+                </p>
+            </div>
+            <button class="item-container-expand-btn" id="item-container-expand-btn">...</button>
+    </div>
+    <button class="admin-btn" id="save-creation-btn">Зберегти</button>
+    <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>
+</div>
+    <section id="items-section">
+        
 
         <!-- Item 1 -->
-        <div class="item-container" data-block-id="1740835238140">
+        <!-- <div class="item-container" data-block-id="1740835238140">
             <div class="item-container-onclick" onclick="extendBlock(1740835238140)">
                 <p id="item-id">ID: 1740835238140</p>
                 <div class="item-edit-dropdowns" style="display: none;">
@@ -130,14 +131,14 @@
                     </select>
                     <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
                 </div>
-                <!-- dropdown edit partially completed -->
-                <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+
+                <div class="item-container-preview" id="item-container-preview"> 
                     <div class="item-container-preview-img-container">
                         <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img" id="creation-img-src">
                     </div>
 
-                    <div class="item-container-preview-text"> <!-- Right part -->
-                        <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                    <div class="item-container-preview-text"> 
+                        <div class="item-container-preview-statusBar"> 
                             <h3 class="item-container-preview-statusBar-title" id="statusBar-title" style="display: block;">Aojiru</h3>
                             <h3 class="item-container-preview-statusBar-title" id="statusBar-title-edit" style="display: none;">
                                 <input class="preview-title" type="text" id="blockName">
@@ -150,7 +151,7 @@
                                 </select>
                             </h4>
                         </div>
-                        <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
+                        <p class="item-container-preview-s-descr" id="item-container-s-description"> 
                             Lorem ipsum dolor sit amet, 
                             consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                         </p>
@@ -160,7 +161,7 @@
                     </div>
                 </div>
 
-                <div class="item-container-d-description" id="item-container-d-description-div"> <!-- Detailed description / expandable -->
+                <div class="item-container-d-description" id="item-container-d-description-div"> 
                     <p id="item-container-d-description-p" style="display: block;">Lorem ipsum dolor sit amet, 
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, 
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
@@ -175,7 +176,7 @@
         </div>
 
         <!-- Item 2 -->
-        <div class="item-container" data-block-id="1740835238141">
+        <!-- <div class="item-container" data-block-id="1740835238141">
             <div class="item-container-onclick" onclick="extendBlock(1740835238141)">
                 <p id="item-id">ID: 1740835238141</p>
                 <div class="item-edit-dropdowns" style="display: none;">
@@ -189,14 +190,14 @@
                     </select>
                     <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
                 </div>
-                <!-- dropdown edit partially completed -->
-                <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+
+                <div class="item-container-preview" id="item-container-preview"> 
                     <div class="item-container-preview-img-container">
                         <img src="img/photo_2024-12-29_18-43-55.png" class="item-container-preview-img" id="creation-img-src">
                     </div>
 
-                    <div class="item-container-preview-text"> <!-- Right part -->
-                        <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
+                    <div class="item-container-preview-text"> 
+                        <div class="item-container-preview-statusBar"> 
                             <h3 class="item-container-preview-statusBar-title" id="statusBar-title" style="display: block;">Aojiru</h3>
                             <h3 class="item-container-preview-statusBar-title" id="statusBar-title-edit" style="display: none;">
                                 <input class="preview-title" type="text" id="blockName">
@@ -209,7 +210,7 @@
                                 </select>
                             </h4>
                         </div>
-                        <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
+                        <p class="item-container-preview-s-descr" id="item-container-s-description">
                             Lorem ipsum dolor sit amet, 
                             consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
                         </p>
@@ -219,7 +220,7 @@
                     </div>
                 </div>
 
-                <div class="item-container-d-description" id="item-container-d-description-div"> <!-- Detailed description / expandable -->
+                <div class="item-container-d-description" id="item-container-d-description-div"> 
                     <p id="item-container-d-description-p" style="display: block;">Lorem ipsum dolor sit amet, 
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, 
                         consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna
@@ -231,7 +232,7 @@
             </div>
             <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="shrinkBlock(1740835238141)">...</button>
             <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(1740835238141)">Редагувати</button>
-        </div>
+        </div> -->
     </section>
     <!-- <button id="test-btn">click</button> -->
 <!-- Footer -->
