@@ -450,8 +450,6 @@ function editBlock(id) {
         console.log(saveThisBlock);
         console.log(blocks);
 
-
-
         editMode = false;
 
         alert('saved!');
@@ -466,7 +464,10 @@ function editBlock(id) {
     delBtn.onclick = function() {
         editMode = false;
         itemBlock.remove();
+        let deleteThisBlock = blocks.findIndex(block => block.id === id.toString());
+        blocks.splice(deleteThisBlock, 1);
         alert('Deleted!')
+        // console.log(blocks);
     }
     itemBlock.appendChild(delBtn);
 
