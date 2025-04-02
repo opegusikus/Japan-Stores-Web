@@ -4,20 +4,44 @@ let categoriesBtn = document.querySelector("#nav-btn-link-categories");
 let categoriesPage = document.querySelector("#categories-dropdown");
 let itemPreview = document.querySelector("#item-container");
 // let creation = false;
-console.log(document.querySelector(`[data-block-id="1740835238140"]`));
+
 let blocks = [
     {
-    id: "1740835238143",
-    block: document.querySelector(`[data-block-id="1740835238143"]`),
+    id: "1740835238140",
+    block: document.querySelector(`[data-block-id="1740835238140"]`),
     category: null,
     subcategory: null,
-    img: "http://127.0.0.1:5501/img/js product img.png",
+    img: "img/Background.jpg",
+    name: "Aojiru in blocks",
+    status: true, 
+    previewDescriprion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna",
+    mainDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna "
+},
+{
+    id: "1740835238141",
+    block: document.querySelector(`[data-block-id="1740835238141"]`),
+    category: null,
+    subcategory: null,
+    img: "img/Background.jpg",
+    name: "Aojiru in blocks",
+    status: false, 
+    previewDescriprion: "previewDescr",
+    mainDescription: "mainDescr"
+},
+{
+    id: "1740835238142",
+    block: document.querySelector(`[data-block-id="1740835238142"]`),
+    category: null,
+    subcategory: null,
+    img: "img/photo_2024-12-29_18-43-55.png",
     name: "Aojiru in blocks",
     status: false, 
     previewDescriprion: "previewDescr",
     mainDescription: "mainDescr"
 }
 ];// Array to keep track of all blocks
+
+console.log(blocks);
 
 // {
 //     id: "1741787553322",
@@ -32,12 +56,11 @@ let blocks = [
 // }
 
 //image upload and refresh
-
-function displayItems() {
+function displayItems() { 
     let itemsSection = document.getElementById("items-section");
-    
-
+    clearAll()
     blocks.forEach(item => {
+
         const displayBlock = document.createElement('div');
         displayBlock.className = 'item-container';
         
@@ -47,7 +70,7 @@ function displayItems() {
         else {
             availability = 'Немає в наявності';
         }
-    
+        item.block = displayBlock;
         displayBlock.innerHTML = `
         <div class="item-container" data-block-id="${item.id}">
             <div class="item-container-onclick" onclick="extendBlock(${item.id})">
@@ -93,7 +116,7 @@ function displayItems() {
                 </div>
 
                 <div class="item-container-d-description" id="item-container-d-description-div"> <!-- Detailed description / expandable -->
-                    <p id="item-container-d-description-p" style="display: block;">Lorem ipsum dolor sit amet, 
+                    <p id="item-container-d-description-p" style="display: block;">
                         ${item.mainDescription}
                     </p>
                     <p>
@@ -112,6 +135,11 @@ function displayItems() {
     
 }
 document.addEventListener("DOMContentLoaded", displayItems);
+
+function clearAll() {
+    let itemsSection = document.getElementById("items-section");
+    itemsSection.innerHTML = '';
+};
 
 function createBlock() {
     let itemsSection = document.getElementById("items-section")
@@ -198,7 +226,7 @@ function createBlock() {
                 </div>
 
                 <div class="item-container-d-description" id="item-container-d-description-div"> <!-- Detailed description / expandable -->
-                    <p id="item-container-d-description-p" style="display: block;">Lorem ipsum dolor sit amet, 
+                    <p id="item-container-d-description-p" style="display: block;">
                         ${mainDescr}
                     </p>
                     <p>
@@ -296,7 +324,6 @@ function editBlock(id) {
     content.classList.add('active');
     const parentAddDropdowns = itemBlock.getElementsByClassName("item-container-onclick");
 
-    let img = itemBlock.getElementsByClassName("item-container-preview-img");
     let itemBlockName = itemBlock.getElementsByClassName("item-container-preview-statusBar-title").textContent;
     let category;
     let editBtn = itemBlock.querySelector("#admin-edit-btn");
@@ -312,10 +339,16 @@ function editBlock(id) {
 
     //create input
     let input = itemBlock.querySelector('#creation-input-file');
-    // console.log(input);
+    let imgContainer = itemBlock.querySelector("#creation-img-src");
+    let initialImg = imgContainer.src;
+    let newImg = initialImg;
+    // console.log(initialImg);
     input.addEventListener("change", function(event) {
         let file = event.target.files[0]; // Get the selected file
-
+        for (const file of this.files) {
+            newImg = `img/${file.name}`
+            console.log(file.name); 
+        }
         if (file) {
             let reader = new FileReader();
 
@@ -327,7 +360,7 @@ function editBlock(id) {
                 // Replace the image source with the new image
                 imageDisplay.src = e.target.result;
             };
-
+            
             reader.readAsDataURL(file);
         }
     });
@@ -357,6 +390,9 @@ function editBlock(id) {
     statusContainer.style.display = 'none';
     statusContainerEdit.style.display = 'block';
 
+    let statusDisplay = itemBlock.querySelector('#status');
+    statusDisplay.value = availability;
+
     const currentPreview = itemBlock.querySelector('.item-container-preview-s-descr');// Edit preview description
     let currentPreviewText = currentPreview.textContent.replace(/\s+/g, " ").trim();
     let previewDescrTextarea = itemBlock.querySelector('#previewDescr');
@@ -371,15 +407,53 @@ function editBlock(id) {
     currentMainDescr.style.display = 'none';
     mainDescrTextarea.style.display = 'block';
 
-
     let saveBtn = document.createElement('button');//Save
     saveBtn.id = 'admin-save-btn';
     saveBtn.classList.add('admin-btn');
     saveBtn.textContent = 'Зберегти';
+    // console.log(typeof(id));
     saveBtn.onclick = function() {
+        
+        const saveThisBlock = blocks.find(block => block.id === id.toString());
+  
+        // console.log(id.toString());
+
+        // console.log(saveThisBlock);
+        // console.log(saveThisBlock.img)
+
+        // blocks.push({
+        //     id: id,
+        //     block: newBlock,
+        //     category: category,
+        //     subcategory: subcategory,
+        //     img: imgLink,
+        //     name: blockName,
+        //     status: status, 
+        //     previewDescriprion: previewDescr,
+        //     mainDescription: mainDescr
+        // });
+        // if (saveThisBlock) {
+            saveThisBlock.img = newImg;
+            console.log(saveThisBlock.img)
+            saveThisBlock.name = nameEditInput.value.toString();
+
+            if (statusDisplay.value === "true") {
+                saveThisBlock.status = true;
+            }
+            else {
+                saveThisBlock.status = false;
+            }
+            saveThisBlock.previewDescriprion = previewDescrTextarea.value;
+            saveThisBlock.mainDescription = mainDescrTextarea.value;
+        // };
+        
+        console.log(saveThisBlock);
+        console.log(blocks);
+
         editMode = false;
-        const index = blocks.findIndex()
+
         alert('saved!');
+        displayItems()
     }
     itemBlock.appendChild(saveBtn);
 
@@ -390,7 +464,10 @@ function editBlock(id) {
     delBtn.onclick = function() {
         editMode = false;
         itemBlock.remove();
+        let deleteThisBlock = blocks.findIndex(block => block.id === id.toString());
+        blocks.splice(deleteThisBlock, 1);
         alert('Deleted!')
+        // console.log(blocks);
     }
     itemBlock.appendChild(delBtn);
 
@@ -400,6 +477,7 @@ function editBlock(id) {
     cancelEditBtn.textContent = 'Атмєна';
     cancelEditBtn.onclick = function() {
         dropdowns.style.display = 'none';//dropdowns
+        imgContainer.src = initialImg;
         nameEditInput.value = currentName;//name
         currentNameBlock.style.display = 'block';
         nameEditBlock.style.display = 'none';
