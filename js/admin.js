@@ -15,7 +15,10 @@ let blocks = [
     name: "Aojiru in blocks",
     status: true, 
     previewDescriprion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna",
-    mainDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna "
+    mainDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a volutpat felis, lobortis molestie tellus. Quisque eget facilisis urna ",
+    rating: null,
+    quantity: null,
+    price: 600
 },
 {
     id: "1740835238141",
@@ -26,7 +29,10 @@ let blocks = [
     name: "Aojiru in blocks",
     status: false, 
     previewDescriprion: "previewDescr",
-    mainDescription: "mainDescr"
+    mainDescription: "mainDescr",
+    rating: null,
+    quantity: null,
+    price: 100009
 },
 {
     id: "1740835238142",
@@ -37,7 +43,10 @@ let blocks = [
     name: "Aojiru in blocks",
     status: false, 
     previewDescriprion: "previewDescr",
-    mainDescription: "mainDescr"
+    mainDescription: "mainDescr",
+    rating: null,
+    quantity: null,
+    price: 10
 }
 ];// Array to keep track of all blocks
 
@@ -123,6 +132,15 @@ function displayItems() {
                         <textarea class="description-input" name="mainDescr" id="mainDescr" style="display: none;"></textarea>
                     </p>
                 </div>
+                <div style="display: flex; justify-content: flex-start;" id="priceDisplay">
+                    <h2 class="price">₴</h2>
+                    <h2 class="price" id="price">${item.price}</h2>
+                    <h2 class="price" style="margin-left:10px;">грн</h2>
+                </div>
+                <div style="display: none; justify-content: flex-start;" id="priceInputBlock">
+                    <h2 class="price">₴</h2><h2 class="price" style="width: 50%;"><input class="preview-title" type="text" id="priceInput"></h2><h2 class="price" style="margin-left:10px;">грн</h2>
+                </div>
+                <h2><input class="preview-title" type="text" id="priceInput" style="display: none;"></h2>
             </div>
             <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="shrinkBlock(${item.id})">...</button>
             <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${item.id})">Редагувати</button>
@@ -151,6 +169,8 @@ function createBlock() {
     let availability;
     let previewDescr = document.getElementById("previewDescr").value;
     let mainDescr = document.getElementById("mainDescr").value;
+    let rating = null;
+    let price = document.getElementById("priceInput").value;
     
     if (status == true) {
         availability = 'В наявності';
@@ -177,67 +197,13 @@ function createBlock() {
         name: blockName,
         status: status, 
         previewDescriprion: previewDescr,
-        mainDescription: mainDescr
+        mainDescription: mainDescr,
+        rating: rating,
+        price: price
     });
     console.log(blocks)
 
-    newBlock.innerHTML = `
-        <div class="item-container" data-block-id="${id}">
-            <div class="item-container-onclick" onclick="extendBlock(${id})">
-                <p id="item-id">ID: ${id}</p>
-                <div class="item-edit-dropdowns" style="display: none;">
-                    <select class="item-container-preview-statusBar-status" name="mainCategory">
-                        <option>health</option>
-                        <option>beauty</option>
-                    </select>
-                    <select class="item-container-preview-statusBar-status" name="subCategory">
-                        <option>creame</option>
-                        <option>powder</option>
-                    </select>
-                    <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
-                </div>
-                <!-- dropdown edit partially completed -->
-                <div class="item-container-preview" id="item-container-preview"> <!--flex-->
-                    <div class="item-container-preview-img-container">
-                        <img src="${imgLink}" class="item-container-preview-img" id="creation-img-src">
-                    </div>
-
-                    <div class="item-container-preview-text"> <!-- Right part -->
-                        <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
-                            <h3 class="item-container-preview-statusBar-title" id="statusBar-title" style="display: block;">${blockName}</h3>
-                            <h3 class="item-container-preview-statusBar-title" id="statusBar-title-edit" style="display: none;">
-                                <input class="preview-title" type="text" id="blockName">
-                            </h3>
-                            <h4 class="item-container-preview-statusBar-status" id="statusBar-status" style="display: block;">${availability}</h4>
-                            <h4 class="item-container-preview-statusBar-status" id="statusBar-status-edit" style="display: none;">
-                                <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                    <option value="true">В наявності</option>
-                                    <option value="false">Немає в наявності</option>
-                                </select>
-                            </h4>
-                        </div>
-                        <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
-                            ${previewDescr}
-                        </p>
-                        <p class="item-container-preview-s-descr">
-                            <textarea class="description-input preview-input" name="previewDescr" id="previewDescr" style="display: none;"></textarea>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="item-container-d-description" id="item-container-d-description-div"> <!-- Detailed description / expandable -->
-                    <p id="item-container-d-description-p" style="display: block;">
-                        ${mainDescr}
-                    </p>
-                    <p>
-                        <textarea class="description-input" name="mainDescr" id="mainDescr" style="display: none;"></textarea>
-                    </p>
-                </div>
-            </div>
-            <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="shrinkBlock(${id})">...</button>
-            <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${id})">Редагувати</button>
-        </div>
-    `;
+    displayItems();
 
     // let itemsSection = document.getElementById("items-section")
     itemsSection.appendChild(newBlock);
@@ -407,6 +373,17 @@ function editBlock(id) {
     currentMainDescr.style.display = 'none';
     mainDescrTextarea.style.display = 'block';
 
+    const currentPrice = itemBlock.querySelector("#price");
+    let currentPriceText = currentPrice.textContent;
+    let priceInput = itemBlock.querySelector("#priceInput");
+    priceInput.value = currentPriceText;
+    let priceDisplay = itemBlock.querySelector("#priceDisplay");
+    priceDisplay.style.display = "none";
+    let priceInputBlock = itemBlock.querySelector("#priceInputBlock");
+    priceInputBlock.style.display = "flex";
+    
+    console.log(priceInput.value);
+
     let saveBtn = document.createElement('button');//Save
     saveBtn.id = 'admin-save-btn';
     saveBtn.classList.add('admin-btn');
@@ -445,6 +422,8 @@ function editBlock(id) {
             }
             saveThisBlock.previewDescriprion = previewDescrTextarea.value;
             saveThisBlock.mainDescription = mainDescrTextarea.value;
+            saveThisBlock.price = Number(priceInput.value)
+            console.log(priceInput.value);
         // };
         
         console.log(saveThisBlock);
@@ -478,7 +457,7 @@ function editBlock(id) {
     cancelEditBtn.onclick = function() {
         dropdowns.style.display = 'none';//dropdowns
         imgContainer.src = initialImg;
-        nameEditInput.value = currentName;//name
+        // nameEditInput.value = currentName;//name
         currentNameBlock.style.display = 'block';
         nameEditBlock.style.display = 'none';
         statusContainer.style.display = 'block';//status
@@ -491,6 +470,8 @@ function editBlock(id) {
         mainDescrTextarea.style.display = 'none';
         shrinkBtn.style.display = 'block';
         editBtn.style.display = 'inline-block';
+        priceDisplay.style.display = "flex";
+        priceInputBlock.style.display = "none";
         saveBtn.remove();
         cancelEditBtn.remove();
         delBtn.remove();
@@ -503,85 +484,3 @@ function editBlock(id) {
 };
 
 
-
-
-
-
-
-
-// Ще один спосіб стоврити блок товару
-
-// function createBlockOption2() {
-//     let itemsSection = document.getElementById("items-section")
-
-//     const blockCreation = document.createElement('div');
-//     blockCreation.className = 'item-container';
-    
-
-//     const id = Date.now().toString();   // Assign a unique ID for reference
-//     let idTemp = Date.now().toString();
-//     blockCreation.dataset.blockId = id;
-
-//     blockCreation.innerHTML = `
-        // <div class="item-container-onclick">
-        // <div style="display:flex; align-items:center; justify-content:space-evenly; margin:0">
-        //     <p>ID: ${id}</p><select>
-        //     <option>health</option>
-        //     <option>beauty</option>
-        //     </select>
-        //     <input type='file' class="img-input" id="creation-input-file" />
-        // </div>
-        //     <div class="item-container-preview" id="item-container-preview"> <!--flex-->
-        //         <div class="item-container-preview-img-container">
-        //             <img src="img/js product img.png" class="item-container-preview-img" id="creation-img-src">
-        //         </div>
-
-        //         <div class="item-container-preview-text"> <!-- Right part -->
-        //             <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
-        //                 <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
-        //                 <h4 class="item-container-preview-statusBar-status">
-        //                     <select class="item-container-preview-statusBar-status" name="status" id="status">
-        //                         <option value="available">В наявності</option>
-        //                         <option value="not-available">Немає в наявності</option>
-        //                     </select>
-        //                 </h4>
-        //             </div>
-        //             <p class="item-container-preview-s-descr"> <!-- Short description -->
-        //                 <textarea class="description-input preview-input" name="previewDescr" id="previewDescr"></textarea>
-        //             </p>
-        //         </div>
-        //     </div>
-
-
-        //     <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
-        //         <p>
-        //             <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea>
-        //         </p> <!-- rows="20" cols="70" -->
-        //     </div>
-        //     <!-- тут має бути кнопка expand -->
-        //     <button class="item-container-expand-btn">...</button>
-        // </div>
-        // <button class="admin-btn" id="save-creation-btn">Зберегти</button>
-        // <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>
-//     `;
-
-//     // blockCreation.push({
-//     // id: id,
-//     // img: "img/js product img.png",
-//     // name: "Aojiru or smth",
-//     // // element: div.block,
-//     // state: "not-available", 
-//     // PreviewDescriprion: "Blabla",
-//     // MainDescription: "Blablabla"
-//     // });
-
-//     // let itemsSection = document.getElementById("items-section")
-//     itemsSection.appendChild(blockCreation);
-//     // Get the header and content elements of the new block
-//     // const preview = blockCreation.querySelector('.item-container-preview');
-//     // const detailed = blockCreation.querySelector('.item-container-d-description');
-//     creation = true;
-// }
-// // createBlockOption2();
-// document.querySelector('#admin-add').addEventListener('click', createBlockOption2);
-// // document.getElementById('save-creation-btn').addEventListener('click', createBlock);
