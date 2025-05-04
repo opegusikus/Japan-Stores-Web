@@ -40,8 +40,10 @@
 }
 
 .login-form-input-container {
-    margin: 0 0 0 32px;
+    margin: 0 32px 0 32px;
+    max-width: 100%;
     /* display: inline-flex; */
+    
 }
 
 .login-form-label {
@@ -50,9 +52,11 @@
 }
 
 .login-form-input {
-    margin: 0;
+    box-sizing: border-box;
+    /* margin: 0, 32px, 0, 0; */
     padding-left: 24px;
-    min-width: 360px;
+    /* min-width: 360px; */
+    min-width: 100%;
     min-height: 48px;
     background-color: #fff;
     color: var(--nonActiveGray);
@@ -65,7 +69,7 @@
 }
 
 .login-btn {
-    margin: 0 0 32px 32px;
+    margin: 32px 0 32px 32px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 24px;
@@ -75,6 +79,10 @@
     border-radius: 12px;
     width: 128px;
     height: 60px;
+}
+
+.login-form-check {
+    font-size: 18px;
 }
 
 .login-btn:hover {

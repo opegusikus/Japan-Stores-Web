@@ -28,14 +28,20 @@
     <form action = "http://localhost:5000/login" method = "post" class="login-form">
         <h3 class="login-form-title">Admin Login</h3>
         <div class="login-form-input-container">
-            <label for="user-name" class="login-form-label">Username</label><br>
-            <input type="text" id="user-name" name="username" class="login-form-input">
+            <label for="user-email" class="login-form-label">User Email</label><br>
+            <input type="text" id="user-email" name="useremail" class="login-form-input">
         </div>
         <div class="login-form-input-container">
             <label for="pass-word" class="login-form-label">Password</label><br>
             <input type="text" id="pass-word" name="password" class="login-form-input">
         </div><br>
-        <input type="submit" value="Log in" class="login-btn">
+        <div class="login-form-input-container">
+            <input type="checkbox" id="login-form-checkBoxSave" name="checkSave"> 
+            <label for="checkSave" class="login-form-check"> Запам'ятати мене</label>
+        </div>
+        <input type="submit" value="Log in" class="login-btn" onclick="login()">
     </form>
+    <p id="statusMsg"></p>
+    <script src="js/login.js"></script>
 </body>
 </html>
