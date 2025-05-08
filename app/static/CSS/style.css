@@ -386,7 +386,7 @@ button:focus {
 .footer-container {
     /* position: relative; */
     margin: 24px auto 24px auto;
-    min-width: 768px;
+    /* min-width: 100%; */
     color: var(--mainWhite);
     position: relative;
     display: flex;
@@ -436,6 +436,9 @@ button:focus {
 } */
 }
 
+/*///////////////////////////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////////////////////////*/
 
 @media (max-width: 1024px) {
     :root {
@@ -451,6 +454,7 @@ button:focus {
         font-family: "Montserrat", serif;
         background: var(--mainWhite);
         margin: 0;
+        /* max-width: 100%; */
         font-weight: var(--standart-fontWeight);
         font-size: var(--standart-fontSize);
         /* min-width: 1360px; */
@@ -481,7 +485,7 @@ button:focus {
     
     .wrapper {
         margin: auto;
-        display: block;
+        display: flex;
         justify-content: space-between;
         align-items: flex-end;
         max-width: 768px;
@@ -500,8 +504,13 @@ button:focus {
         margin: 24px 12px 2px 32px;
     }
     
-    .header-navigation-box {
+    .header-title-box {
         display: flex;
+    }
+
+    .header-navigation-box {
+        /* display: flex; */
+        display: none;
         align-items: end;
     }
     
@@ -523,15 +532,15 @@ button:focus {
     .background-pic-container {
         position: relative; /* Makes the container a reference for absolute positioning */
         /* margin: 85px 60px 60px 60px;  */
-        margin: 85px auto 60px auto; 
+        margin: 12px auto 60px auto; 
         background-color: aqua;
         border-radius: 48px;
-        max-width: 1240px;
+        max-width: 1024px;
         overflow: hidden; /* Hide overflow */
         white-space: normal;
         padding: 24px; /* Padding inside the parent */
         box-sizing: border-box; /* Include padding in width/height */
-        height: 566px;
+        height: 312px;
     }
     
     .index-background-pic {
@@ -548,8 +557,8 @@ button:focus {
         left: 50%; /* Move right by 50% of parent's width */
         transform: translate(-50%, -50%); /* Center the child div */
         text-align: left;
-        padding: 10px; /* Inner padding */
-        width: calc(100% - 80px); /* Adjust width to account for margins */
+        /* padding: 10px; Inner padding */
+        width: calc(100% - 32px); /* Adjust width to account for margins */
         max-width: 100%; /* Ensure it doesn't exceed parent's width */
         box-sizing: border-box; /* Include padding and border in width/height */
         display: flex;
@@ -560,8 +569,8 @@ button:focus {
     
     .background-pic-text {
         color: #fff5e8; /* Text color */
-        font-weight: 900;
-        font-size: 64px;    
+        font-weight: 600;
+        font-size: 32px;    
     }
     
     /* ----------------------------------------------------------------- */
@@ -573,6 +582,7 @@ button:focus {
     }
     
     .items-navigation-bar {
+        height: 64px;
         margin: auto;
         display: flex;
         justify-content: space-between;
@@ -584,8 +594,9 @@ button:focus {
     .items-nav {
         margin: 0 0 0 30px;
         max-width: 1360px;
-        height: 80px;
-        display: flex;
+        height: 64px;
+        /* display: flex; */
+        display: none;
         justify-content: flex-start;
         align-items: stretch;
     }
@@ -720,20 +731,19 @@ button:focus {
     .item-container {
         position: relative;
         cursor: default;
-        font-weight: 400;
+        font-weight: 300;
         font-size: 18px;
-        margin: 0 auto 60px auto;
+        margin: 0 auto 16px auto;
     
         background-color: #fff;
-        border-radius: 48px;
-        max-width: 768px;
+        border-radius: 32px;
+        max-width: 90%;
         color: var(--mainBlack);
-        
         
     }
     
     .item-container-preview {
-        display: flex; 
+        /* display: flex;  */
         
     }
     
@@ -742,12 +752,16 @@ button:focus {
     } */
     
     .item-container-preview-img {
-        max-width: 140px;
-        max-height: 140px;
+        /* min-width: 140px; */
+        /* min-height: 140px; */
+        position: relative;
+        left: 5%;
+        min-width: 90%;
+        min-height: 90%; 
     }
     
     .item-container-preview-text {
-        margin-left: 32px;
+        margin-left: 12px;
         width: 100%;
     } 
     
@@ -814,6 +828,7 @@ button:focus {
     .footer {
         font-weight: 400;
         font-size: 12px;
+        /* padding: 12px; */
         /* position: fixed; */
         display: flex;
         background-color: var(--mainGreen);
@@ -826,22 +841,14 @@ button:focus {
     .footer-container {
         /* position: relative; */
         margin: 24px auto 24px auto;
-        min-width: 768px;
+        /* min-width: 768px; */
         color: var(--mainWhite);
         position: relative;
-        display: flex;
+        /* display: flex; */
         justify-content: space-between;
         align-items: start;
     
     }
-    
-    /* .footer-links {
-    
-    } */
-    
-    /* .footer-navigation-link {
-    
-    } */
      
     .footer-title {
         position: relative;
@@ -862,11 +869,11 @@ button:focus {
     .inquiries-container {
         position: relative;
         align-self: center;
-        justify-self: right;
+        /* justify-self: right; */
     }
     
     .inquiries-container-title {
-        font-weight: 500;
+        font-weight: 400;
         font-size: 24px;
         margin-top: 0;
     }

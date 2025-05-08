@@ -1,5 +1,8 @@
 # ignore venv directory
 
-venv
+japvenv
 
 todo.txt
+
+user.db
+user.py
