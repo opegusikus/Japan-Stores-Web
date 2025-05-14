@@ -543,6 +543,7 @@ button:focus {
         z-index: 1;
         -webkit-user-select: none;
         user-select: none;
+        
       }
       
       #menuToggle input
@@ -603,9 +604,9 @@ button:focus {
       
       #menu
       {
-        position: absolute;
+        position: fixed;
         width: 100%;
-        height: 400px;
+        height: 100vh;
         box-shadow: 0 0 3px #85888C;
         margin: -50px 0 0 -50px;
         padding: 50px;
@@ -628,8 +629,20 @@ button:focus {
         transform: none;
       }
 
+    .header-navigation-dropdown-content-btn {
+        padding: 0 16px 0 0;
+        background: none;
+        margin: 0 0 2px 0;
+        font-weight: 400;
+        font-size: 24px;
+        color: var(--mainBlack);
+    }
 
-
+    .header-navigation-dropdown-content {
+        margin-left: 1em;
+        display: flex;
+        flex-direction: column;
+    }
 
     .header-title {
         font-weight: 800;
@@ -721,7 +734,7 @@ button:focus {
         height: 64px;
         margin: auto;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
         max-width: 1024px;
         position: relative;
@@ -859,10 +872,19 @@ button:focus {
     }
     
     /* Items------------------------------------------------------------ */
+    
+
+    
     .item-container-onclick {
         margin: 0;
         padding: 32px;
     }
+
+    /* .items-section-cl {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    } */
     
     .item-container {
         position: relative;
@@ -879,8 +901,7 @@ button:focus {
     }
     
     .item-container-preview {
-        /* display: flex;  */
-        
+        /* display: flex;  */   
     }
     
     .item-container-preview-img-container {
