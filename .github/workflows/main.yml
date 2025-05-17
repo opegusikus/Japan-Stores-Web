@@ -1,0 +1,17 @@
+name: VPSDeploy
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Run new container
+        run: |
+          cp -R app/ /var/www/js.x.ks.ua/
