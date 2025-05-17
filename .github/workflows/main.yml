@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Remove all old files
+        run: |
+          rm -rfv /var/www/js.x.ks.ua/*
+
       - name: Deploy static files
         run: |
           cd app && cp -R -v . /var/www/js.x.ks.ua/
