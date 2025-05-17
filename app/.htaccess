@@ -1,0 +1,18 @@
+# Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /
+
+# Remove .html extension (permanent redirect)
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*?)/?$ /$1 [R=301,L]
+
+# Allow existing files (css, js, images, html)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Special case: if path starts with existing .html file prefix
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^/]+)/(.+)$ /$1.html#/$2 [R=302,L]
+
+# If not a real file, redirect to index.html#path
+RewriteRule ^(.*)$ /index.html#/$1 [R=302,L]
