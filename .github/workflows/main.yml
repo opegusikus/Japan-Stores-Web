@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Run new container
+      - name: Deploy static files
         run: |
-          cp -R app/ /var/www/js.x.ks.ua/
+          cd app && cp -R -v . /var/www/js.x.ks.ua/
