@@ -61,8 +61,23 @@
     </section>
 
     <section>
-        <div class="admin-add">
-            <button class="admin-btn" id="admin-add">Додати товар</button>
+        <div class="admin-contorol-panel" >
+            <div class="admin-add">
+                <button class="admin-btn" id="admin-add">Додати товар</button>
+            </div>
+            <div class="admin-add">
+                <button class="admin-btn" id="admin-categoryEdit">Редагувати Категорії</button>
+            </div>
+            <div class="admin-add">
+                <button class="admin-btn" id="admin-categoryGet" onclick="getCategoriesInfo()">Дай категорії</button>
+            </div>
+            <div class="admin-add">
+                <button class="admin-btn" id="admin-itemsGet" onclick="getItemsInfo()">Дай айтеми</button>
+            </div>
+            <div class="admin-add">
+                <button class="admin-btn" id="admin-logout" onclick="logout()" style="background-color: brown;">Log out</button>
+            </div>
+
         </div>
     </section>
 
@@ -115,6 +130,9 @@
     </div>
     <button class="admin-btn" id="save-creation-btn">Зберегти</button>
     <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>
+</div>
+<div class="item-container" id="edit-categories">
+    
 </div>
     <section id="items-section">
     </section>

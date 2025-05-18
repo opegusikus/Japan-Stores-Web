@@ -276,6 +276,10 @@ button:focus {
     display: block;
 }
 
+.admin-contorol-panel {
+        display: flex;
+}
+
 /* Items------------------------------------------------------------ */
 .item-container-onclick {
     margin: 0;
@@ -670,6 +674,7 @@ button:focus {
         color: var(--mainBlack);
         align-items: end;
     }
+
     /* ----------------------------------------------------------------- */
     
     .background-pic-section {
@@ -833,6 +838,10 @@ button:focus {
         background-color: #ffc978;
     }
     
+    .admin-contorol-panel {
+        display: flex;
+    }
+
     /* Dropdown menu from here ---------------------- */
     
     .categories-dropdown { /* Background of dropdown */

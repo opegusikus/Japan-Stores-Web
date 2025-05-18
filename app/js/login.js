@@ -39,3 +39,4 @@ async function login(event) {
 
   return false; // зупиняє стандартне відправлення
 }
+

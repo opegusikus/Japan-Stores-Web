@@ -58,3 +58,11 @@ option {
     font-size: 32px;
     /* width: 50%; */
 }
+
+.admin-add {
+    margin: 0;
+}
+.admin-contorol-panel {
+    display: flex;
+    justify-self: center;
+}

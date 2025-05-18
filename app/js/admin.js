@@ -484,3 +484,38 @@ function editBlock(id) {
 };
 
 
+async function logout() {
+  const res = await fetch('http://localhost:3000/logout', {
+    method: 'POST',
+    credentials: 'include'
+  });
+
+  const result = await res.json();
+
+  if (result.status === 0) {
+    alert('Вихід виконано успішно');
+    window.location.href = '/'; // або на сторінку логіну
+  } else {
+    alert('Помилка при виході');
+  }
+}
+
+async function getCategoriesInfo() {
+  const response = await fetch('http://localhost:3000/api/category/read', {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+async function getItemsInfo() {
+  const response = await fetch('http://localhost:3000/api/item/read', {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
