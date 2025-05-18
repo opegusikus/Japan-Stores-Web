@@ -88,3 +88,8 @@
 .login-btn:hover {
     background: #972d00;
 }
+
+.status-msg {
+    margin-top: 128px;
+    text-align: center;
+}

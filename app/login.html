@@ -25,7 +25,7 @@
     </header>
     <!-- <p><input type = "text" name = "nm" /></p> -->
 
-    <form method = "post" class="login-form" onsubmit="return login()"><!--  onsubmit="login()" -->
+    <form class="login-form" onsubmit="return login(event)"><!--  onsubmit="login()" -->
         <h3 class="login-form-title">Admin Login</h3>
         <div class="login-form-input-container">
             <label for="user-email" class="login-form-label">User Email</label><br>
@@ -41,7 +41,7 @@
         </div>
         <input type="submit" value="Log in" class="login-btn"> <!-- onclick="login()"-->
     </form>
-    <p id="statusMsg"></p>
+    <p class="status-msg" id="statusMsg"></p>
     <script src="/js/login.js"></script>
 </body>
 </html>
