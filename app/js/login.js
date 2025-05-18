@@ -19,7 +19,7 @@ async function sha256(message) {
       credentials: 'include', // This ensures cookies are sent/stored
       body: JSON.stringify({ mail, pwd })
     });
-
+    // console.log('mes');
     const result = await response.json();
     const statusMsg = document.getElementById('statusMsg');
 
@@ -30,5 +30,6 @@ async function sha256(message) {
     } else {
       statusMsg.textContent = "❌ Login failed. User not found or wrong password.";
       statusMsg.style.color = "red";
+      // console.log(result);
     }
   }
