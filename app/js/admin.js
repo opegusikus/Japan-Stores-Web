@@ -485,7 +485,7 @@ function editBlock(id) {
 
 
 async function logout() {
-  const res = await fetch('http://localhost:3000/logout', {
+  const res = await fetch('/logout', {
     method: 'POST',
     credentials: 'include'
   });
@@ -501,7 +501,7 @@ async function logout() {
 }
 
 async function getCategoriesInfo() {
-  const response = await fetch('http://localhost:3000/api/category/read', {
+  const response = await fetch('/api/category/read', {
     method: 'GET',
     credentials: 'include'
   });
@@ -511,7 +511,7 @@ async function getCategoriesInfo() {
 }
 
 async function getItemsInfo() {
-  const response = await fetch('http://localhost:3000/api/item/read', {
+  const response = await fetch('/api/item/read', {
     method: 'GET',
     credentials: 'include'
   });
