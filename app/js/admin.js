@@ -1,5 +1,6 @@
 var editMode = false;
 let creationBlock = document.getElementById("creation-block");
+let categoryEditBlock = document.getElementById("edit-categories");
 let categoriesBtn = document.querySelector("#nav-btn-link-categories");
 let categoriesPage = document.querySelector("#categories-dropdown");
 let itemPreview = document.querySelector("#item-container");
@@ -50,7 +51,7 @@ let blocks = [
 }
 ];// Array to keep track of all blocks
 
-console.log(blocks);
+// console.log(blocks);
 
 // {
 //     id: "1741787553322",
@@ -219,13 +220,33 @@ document.getElementById('save-creation-btn').addEventListener('click', createBlo
 
 // Відкриття блоку для створення товару 
 document.querySelector('#admin-add').onclick = function() {
-    creationBlock.style.display = "block";
+    if (categoryEditBlock.style.display === "none") {
+        creationBlock.style.display = "block";
+    }
+    else {
+        creationBlock.style.display = "none";
+    }
 };
 
 //Відміна створення товару
 document.querySelector("#cancel-creation-btn").onclick = function() {
-    creationBlock.style.display = "none"
-}
+    creationBlock.style.display = "none";
+};
+
+// Відкриття блоку для створення категорій
+document.querySelector('#admin-categoryEdit').onclick = function() {
+    if (creationBlock.style.display === "none") {
+        categoryEditBlock.style.display = "block";
+    }
+    else {
+        categoryEditBlock.style.display = "none";
+    }
+};
+
+//Відміна створення категорій
+document.querySelector('#cancel-categoryEdit-btn').onclick = function() {
+    categoryEditBlock.style.display = "none";
+};
 
 // Відкриття категорій
 categoriesBtn.onclick = function() {
@@ -508,6 +529,7 @@ async function getCategoriesInfo() {
 
   const data = await response.json();
   console.log(data);
+  document.querySelector("#categories-display").innerHTML = `${data}`;
 }
 
 async function getItemsInfo() {

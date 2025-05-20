@@ -1,3 +1,4 @@
+@media (min-width: 1024px) {
 .admin-add {
     margin: 0 auto 32px auto;
     text-align: start;
@@ -41,7 +42,10 @@ option {
 }
 
 #creation-block {
-    /* display: block; */
+    display: none;
+}
+
+#edit-categories {
     display: none;
 }
 
@@ -65,4 +69,80 @@ option {
 .admin-contorol-panel {
     display: flex;
     justify-self: center;
+}
+}
+
+
+@media (max-width: 1024px) {
+    .admin-add {
+    margin: 0 auto 32px auto;
+    text-align: start;
+    /* align-items: center; */
+    max-width: 768px;
+}
+
+.admin-btn {
+    background-color: var(--mainGreen);
+    color: var(--mainWhite);
+    margin: 0 auto 32px 60px;
+}
+
+.description-input {
+    /* margin: 0; */
+    font-weight: var(--standart-fontWeight);
+    font-size: var(--standart-fontSize);
+    width: 100%;
+    height: 256px;
+}
+.preview-input {
+    height: 64px;
+}
+.img-input {
+    width: 88px;
+}
+
+.preview-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 32px;
+    width: 80%;
+}
+
+select {
+    height: 100%;
+}
+
+option {
+    margin: auto;
+}
+
+#creation-block {
+    display: none;
+}
+
+#edit-categories {
+    display: none;
+}
+
+.item-edit-dropdowns {
+    display:flex; 
+    align-items:center; 
+    justify-content:space-evenly; 
+    margin-bottom: 8px;
+}
+
+.price {
+    margin: 0;
+    font-weight: 600;
+    font-size: 32px;
+    /* width: 50%; */
+}
+
+.admin-add {
+    margin: 0;
+}
+.admin-contorol-panel {
+    display: flex;
+    justify-self: center;
+}
 }
