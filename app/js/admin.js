@@ -522,6 +522,16 @@ async function logout() {
 }
 
 async function getCategoriesInfo() {
+    // fetch('/api/item/read', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ name: "Cars" })
+    // })
+    // .then(res => res.json())
+    // .then(console.log);
+
+
+
   const response = await fetch('/api/category/read', {
     method: 'GET',
     credentials: 'include'
@@ -529,7 +539,15 @@ async function getCategoriesInfo() {
 
   const data = await response.json();
   console.log(data);
-  document.querySelector("#categories-display").innerHTML = `${data}`;
+  data.forEach(category => {
+    console.log(category.name);
+  })
+  data.forEach(car => {
+    const div = document.createElement("div");
+    div.innerHTML = `<h3>${car.name}</h3><p>${car.description}</p>`;
+    document.querySelector('#edit-categories').appendChild(div);
+
+  })
 }
 
 async function getItemsInfo() {
