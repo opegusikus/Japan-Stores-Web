@@ -537,10 +537,20 @@ async function getCategoriesInfo() {
   data.forEach(car => {
     const div = document.createElement("div");
     console.log(car.id);
-    div.innerHTML = `<h3>${car.name}</h3><p>${car.description}</p><button class="admin-btn" style="color: red;" id="admin-del-btn" onclick="deleteCategory(${car.id})">Delete</button>`;
+    div.innerHTML = `<h3>${car.name}</h3><p>${car.description}</p>
+    <input type="text" style="display: none" id="category-name-${car.id}" placeholder="Category name" value="${car.name}">
+    <input type="text" style="display: none" id="category-descr-${car.id}" placeholder="Category description" value="${car.description}">
+    <button class="admin-btn" style="display: none" id="admin-categorySaveUpdate-btn-${car.id}" onclick="updateCategory(${car.id})">Save</button>
+    <button class="admin-btn" style="display: none" id="admin-categoryCancelUpdate-btn-${car.id}" onclick="cancelUpdateCategory(${car.id})">Cancel</button>
+    <button class="admin-btn" id="admin-update-btn" onclick="editCategory(${car.id})">Edit</button>
+    <button class="admin-btn" style="background-color: brown;" id="admin-del-btn" onclick="deleteCategory(${car.id})">Delete</button>
+    
+    `;
+    div.classList.add('category-block-area');
     document.querySelector('.categories-display-container').appendChild(div);
 
   })
+
 }
 
 async function createCategory() {
@@ -564,6 +574,7 @@ async function createCategory() {
         const result = await response.json();
         console.log(result);
         alert("Category created");
+        updateCategoriesDisplay()
     }
 
     // if (result.status === 0) {
@@ -578,6 +589,47 @@ async function createCategory() {
     
 }
 
+function editCategory(categoryId) {
+    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
+    console.log(categoryId);
+    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "block";
+    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "block";
+    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "block";
+    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "block";
+}
+
+async function updateCategory(categoryId) {
+    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
+    let name = categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).value;
+    let description = categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).value;
+    const response = await fetch('/api/category/update', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id: categoryId,
+            name: name,
+            description: description
+        })
+    })
+    const result = await response.json();
+    console.log(result);
+    alert("Category updated");
+
+    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
+    updateCategoriesDisplay()
+}
+
+function cancelUpdateCategory(categoryId) {
+    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
+    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
+}
+
 async function deleteCategory(categoryId) {
     console.log(categoryId);
     const response = await fetch('/api/category/delete', {
@@ -590,10 +642,18 @@ async function deleteCategory(categoryId) {
         const result = await response.json();
         console.log(result);
         alert("Category deleted");
+        updateCategoriesDisplay()
 }
+
+
 
 function clearCategoriesDisplay() {
     document.querySelector('.categories-display-container').innerHTML = '';
+}
+
+function updateCategoriesDisplay() {
+    clearCategoriesDisplay();
+    getCategoriesInfo();
 }
 
 async function getItemsInfo() {

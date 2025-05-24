@@ -75,6 +75,10 @@
 .categories-display-container {
         display: block;
     }
+
+.category-block-area {
+        background-color: #d4d1cd;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -141,5 +145,9 @@
 
     .categories-display-container {
         display: block;
+    }
+
+    .category-block-area {
+        background-color: #d4d1cd;
     }
 }
