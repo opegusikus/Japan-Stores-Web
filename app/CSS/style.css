@@ -276,9 +276,7 @@ button:focus {
     display: block;
 }
 
-.admin-contorol-panel {
-        display: flex;
-}
+
 
 /* Items------------------------------------------------------------ */
 .item-container-onclick {
@@ -837,10 +835,7 @@ button:focus {
     .items-nav-search-btn:active {
         background-color: #ffc978;
     }
-    
-    .admin-contorol-panel {
-        display: flex;
-    }
+
 
     /* Dropdown menu from here ---------------------- */
     
@@ -906,12 +901,21 @@ button:focus {
         border-radius: 32px;
         max-width: 90%;
         color: var(--mainBlack);
-        
+        /* position: relative;
+        cursor: default;
+        font-weight: 400;
+        font-size: 18px;
+        margin: 0 auto 60px auto;
+
+        background-color: #fff;
+        border-radius: 48px;
+        max-width: 768px;
+        color: var(--mainBlack); */
     }
     
-    .item-container-preview {
-        /* display: flex;  */   
-    }
+    /* .item-container-preview {
+        display: flex;    
+    } */
     
     .item-container-preview-img-container {
     display: flex;

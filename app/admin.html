@@ -156,10 +156,17 @@
 </div>
 <!-- Створення/редагування категорій-->
 <div class="item-container" id="edit-categories" style="display: none;">
-    <div class="item-container-onclick">
+    <div class="item-container-onclick" id="item-container-onclick">
         <h2>Редагування категорій</h2>
+        <h3>Додати Каегорію</h3>
         <p id="categories-display"></p>
-        <input type="text" id="categoryName" placeholder="Назва категорії">
+        <input type="text" id="category-name" placeholder="Назва категорії">
+        <input type="text" id="category-descr" placeholder="Опис категорії">
+        <button class="admin-btn" id="categoryEdit-add-btn" onclick="createCategory()">Додати</button>
+        <div class="categories-display-container">
+
+        </div>
+        
         <button class="admin-btn" id="cancel-categoryEdit-btn">Атмєна</button>
     </div>
 </div>
@@ -184,6 +191,12 @@
         </div>
     </div>
     </footer>
+    <!-- <div class="admin-add">
+                <button class="admin-btn" id="admin-categoryGet" onclick="console.log('hey')">Дай категорії</button>
+            </div>
+            <div class="admin-add">
+                <button class="admin-btn" id="admin-categoryEdit">Редагувати Категорії</button>
+            </div> -->
     <script src="/js/admin.js"></script>
 </body>
 </html>
