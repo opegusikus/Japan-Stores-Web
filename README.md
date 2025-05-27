@@ -31,7 +31,9 @@ Core structure and styling are in place. Further improvements and interactive fe
 
 ## Demo
 You can view the deployed demo version here:
-https://js.x.ks.ua/
+Main page: https://js.x.ks.ua/
+Login page: https://js.x.ks.ua/login
+Admin page: https://js.x.ks.ua/admin
 
 ## How to Run
 
