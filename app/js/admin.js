@@ -1,5 +1,6 @@
 var editMode = false;
 let creationBlock = document.getElementById("creation-block");
+let categoryEditBlock = document.getElementById("edit-categories");
 let categoriesBtn = document.querySelector("#nav-btn-link-categories");
 let categoriesPage = document.querySelector("#categories-dropdown");
 let itemPreview = document.querySelector("#item-container");
@@ -50,7 +51,7 @@ let blocks = [
 }
 ];// Array to keep track of all blocks
 
-console.log(blocks);
+// console.log(blocks);
 
 // {
 //     id: "1741787553322",
@@ -219,13 +220,35 @@ document.getElementById('save-creation-btn').addEventListener('click', createBlo
 
 // Відкриття блоку для створення товару 
 document.querySelector('#admin-add').onclick = function() {
-    creationBlock.style.display = "block";
+    if (categoryEditBlock.style.display === "none") {
+        creationBlock.style.display = "block";
+    }
+    else {
+        creationBlock.style.display = "none";
+    }
 };
 
 //Відміна створення товару
 document.querySelector("#cancel-creation-btn").onclick = function() {
-    creationBlock.style.display = "none"
-}
+    creationBlock.style.display = "none";
+};
+
+// Відкриття блоку для створення категорій
+document.querySelector('#admin-categoryEdit').onclick = function() {
+    if (creationBlock.style.display === "none") {
+        getCategoriesInfo();
+        categoryEditBlock.style.display = "block";
+    }
+    else {
+        categoryEditBlock.style.display = "none";
+    }
+};
+
+//Відміна створення категорій
+document.querySelector('#cancel-categoryEdit-btn').onclick = function() {
+    categoryEditBlock.style.display = "none";
+    clearCategoriesDisplay();
+};
 
 // Відкриття категорій
 categoriesBtn.onclick = function() {
@@ -483,4 +506,163 @@ function editBlock(id) {
     // let cancelEditBtn = itemBlock.querySelector('#admin-edit-btn');//cancel
 };
 
+
+async function logout() {
+  const res = await fetch('/logout', {
+    method: 'POST',
+    credentials: 'include'
+  });
+
+  const result = await res.json();
+
+  if (result.status === 0) {
+    alert('Вихід виконано успішно');
+    window.location.href = '/'; // або на сторінку логіну
+  } else {
+    alert('Помилка при виході');
+  }
+}
+
+async function getCategoriesInfo() {
+  const response = await fetch('/api/category/read', {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const data = await response.json();
+  console.log(data);
+  data.forEach(category => {
+    console.log(category.name);
+  })
+  data.forEach(car => {
+    const div = document.createElement("div");
+    console.log(car.id);
+    div.innerHTML = `<h3>${car.name}</h3><p>${car.description}</p>
+    <input type="text" style="display: none" id="category-name-${car.id}" placeholder="Category name" value="${car.name}">
+    <input type="text" style="display: none" id="category-descr-${car.id}" placeholder="Category description" value="${car.description}">
+    <button class="admin-btn" style="display: none" id="admin-categorySaveUpdate-btn-${car.id}" onclick="updateCategory(${car.id})">Save</button>
+    <button class="admin-btn" style="display: none" id="admin-categoryCancelUpdate-btn-${car.id}" onclick="cancelUpdateCategory(${car.id})">Cancel</button>
+    <button class="admin-btn" id="admin-update-btn" onclick="editCategory(${car.id})">Edit</button>
+    <button class="admin-btn" style="background-color: brown;" id="admin-del-btn" onclick="deleteCategory(${car.id})">Delete</button>
+    
+    `;
+    div.classList.add('category-block-area');
+    document.querySelector('.categories-display-container').appendChild(div);
+
+  })
+
+}
+
+async function createCategory() {
+    let name = document.getElementById("category-name").value;
+    let description = document.getElementById("category-descr").value;
+    console.log(name);
+    console.log(description);
+    if (name === "" || description === "") {
+        alert("Please fill in all fields");
+        return;
+    }
+    else {
+        const response = await fetch('/api/category/create', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: name,
+                description: description
+            })
+        })
+        const result = await response.json();
+        console.log(result);
+        alert("Category created");
+        updateCategoriesDisplay()
+    }
+
+    // if (result.status === 0) {
+    //     alert("✅ Category created successfully");
+    //     // Optionally reload or update category list:
+    //     clearCategoriesDisplay()
+    //     getCategoriesInfo()
+    // } 
+    // else {
+    //     alert("❌ Failed to create category: " + (result.error || "Unknown error"));
+    // }
+    
+}
+
+function editCategory(categoryId) {
+    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
+    console.log(categoryId);
+    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "block";
+    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "block";
+    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "block";
+    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "block";
+}
+
+async function updateCategory(categoryId) {
+    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
+    let name = categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).value;
+    let description = categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).value;
+    const response = await fetch('/api/category/update', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id: categoryId,
+            name: name,
+            description: description
+        })
+    })
+    const result = await response.json();
+    console.log(result);
+    alert("Category updated");
+
+    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
+    updateCategoriesDisplay()
+}
+
+function cancelUpdateCategory(categoryId) {
+    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
+    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "none";
+    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
+}
+
+async function deleteCategory(categoryId) {
+    console.log(categoryId);
+    const response = await fetch('/api/category/delete', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: categoryId
+            })
+        })
+        const result = await response.json();
+        console.log(result);
+        alert("Category deleted");
+        updateCategoriesDisplay()
+}
+
+
+
+function clearCategoriesDisplay() {
+    document.querySelector('.categories-display-container').innerHTML = '';
+}
+
+function updateCategoriesDisplay() {
+    clearCategoriesDisplay();
+    getCategoriesInfo();
+}
+
+async function getItemsInfo() {
+  const response = await fetch('/api/item/read', {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
 
