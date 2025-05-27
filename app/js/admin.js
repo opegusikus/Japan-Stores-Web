@@ -200,22 +200,22 @@ document.addEventListener('click', (e) => {
 });
 
 // Add click event listener to created preview for extention
-function extendBlock(id) {
-    const block = document.querySelector(`[data-block-id="${id}"]`);
-    const content = block.querySelector('.item-container-d-description');
-    if (!content.classList.contains('active') && editMode === false) {
-        content.classList.add('active');
-    }
-}
+// function extendBlock(id) {
+//     const block = document.querySelector(`[data-block-id="${id}"]`);
+//     const content = block.querySelector('.item-container-d-description');
+//     if (!content.classList.contains('active') && editMode === false) {
+//         content.classList.add('active');
+//     }
+// }
 
-//remove extention
-function shrinkBlock(id) {
-    if (editMode === false) {
-        const block = document.querySelector(`[data-block-id="${id}"]`);
-        const content = block.querySelector('.item-container-d-description');
-        content.classList.remove('active');
-    }
-}
+// //remove extention
+// function shrinkBlock(id) {
+//     if (editMode === false) {
+//         const block = document.querySelector(`[data-block-id="${id}"]`);
+//         const content = block.querySelector('.item-container-d-description');
+//         content.classList.remove('active');
+//     }
+// }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function editBlock(id) {
@@ -466,6 +466,21 @@ async function getCategoriesInfo() {
 
 }
 
+// async function deleteCookie() {
+//     const response = await fetch('/api/category/deleteCookie', {
+//         method: 'DELETE',
+//         credentials: 'include'
+//     });
+
+//     const result = await response.json();
+//     console.log(result);
+//     if (result.status === 0) {
+//         alert("Cookie deleted successfully");
+//     } else {
+//         alert("Failed to delete cookie: " + (result.error || "Unknown error"));
+//     }
+// }
+
 async function createCategory() {
     let name = document.getElementById("category-name").value;
     let description = document.getElementById("category-descr").value;
@@ -606,7 +621,7 @@ async function displayItems() {
         item.block = displayBlock;
         displayBlock.innerHTML = `
         <div class="item-container" data-block-id="${item.id}">
-            <div class="item-container-onclick" onclick="extendBlock(${item.id})">
+            <div class="item-container-onclick" onclick="window.location.href='/item.html?id=${item.id}'">
                 <p id="item-id">ID: ${item.id}</p>
                 <div class="item-edit-dropdowns" style="display: none;">
                     <select class="item-container-preview-statusBar-status" name="mainCategory">
@@ -666,7 +681,6 @@ async function displayItems() {
                 </div>
                 <h2><input class="preview-title" type="text" id="priceInput" style="display: none;"></h2>
             </div>
-            <button class="item-container-expand-btn" id="item-container-expand-btn" onclick="window.location.href='/item.html?id=${item.id}'">...</button>
             <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${item.id})">Редагувати</button>
         </div>
         `;//onclick="shrinkBlock(${item.id})"

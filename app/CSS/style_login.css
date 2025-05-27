@@ -92,7 +92,14 @@
     }
 
     .status-msg {
-        margin-top: 128px;
+        color: var(--mainBlack);
+        padding: 8px;
+        background-color: brown;
+        /* margin: 2em 0 32em 32em; */
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 24px;
+        margin: auto;
         text-align: center;
     }
 }
@@ -193,7 +200,14 @@
     }
 
     .status-msg {
-        margin-top: 128px;
+        color: var(--mainBlack);
+        padding: 8px;
+        background-color: brown;
+        /* margin: 2em 0 32em 32em; */
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 24px;
+        margin: auto;
         text-align: center;
     }
 }
