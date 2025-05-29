@@ -2,6 +2,7 @@
 
 A real-world front-end project showcasing a web directory of Japanese stores.  
 The project is currently **in development**, but already includes functional layout and visual structure. It was created as part of my personal learning journey in front-end development.
+API was created by a different person and located in private repository.
 
 ## Project Purpose
 
@@ -11,6 +12,7 @@ This project is based on real content and was developed to:
 - Improve design implementation based on Figma mockups
 - Explore basic front-end structure for store directories
 - Develop reusable layout blocks for future projects
+- Practice work with APIs
 
 **Current Status:** In development  
 Core structure and styling are in place. Further improvements and interactive features are planned.
@@ -21,6 +23,7 @@ Core structure and styling are in place. Further improvements and interactive fe
 - Clean UI with navigation bar and store sections
 - Static front-end structure ready for backend/API integration
 - Simple and understandable codebase
+- Simple login, manage contents through admin page.
 
 ## Technologies Used
 
