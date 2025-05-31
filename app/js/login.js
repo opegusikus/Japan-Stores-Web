@@ -28,13 +28,15 @@ async function login(event) {
 
   if (result.status === 0) {
     statusMsg.textContent = "✅ Login successful!";
-    statusMsg.style.color = "green";
+    statusMsg.style.color = "#01060d";
     setTimeout(() => {
       window.location.href = "/admin";
     }, 1000);
   } else {
+    statusMsg.style.display = "block";
+    statusMsg.style.backgroundColor = "brown";
     statusMsg.textContent = "❌ Login failed: " + (result.error || "Unknown error");
-    statusMsg.style.color = "red";
+    statusMsg.style.color = "#fff5e8";
   }
 
   return false; // зупиняє стандартне відправлення
