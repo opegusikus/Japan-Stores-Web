@@ -1,3 +1,14 @@
+import { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAll } from './manage_items.js';
+import { getCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelUpdateCategory, clearCategoriesDisplay } from './manage_categories.js';
+
+document.getElementById('save-creation-btn').addEventListener('click', () => {
+    createItem();
+});
+document.getElementById('categoryEdit-add-btn').addEventListener('click', () => {
+    createCategory();
+});
+
+
 var editMode = false;
 let creationBlock = document.getElementById("creation-block");
 let categoryEditBlock = document.getElementById("edit-categories");
@@ -49,28 +60,8 @@ let blocks = [
     quantity: null,
     price: 10
 }
-];// Array to keep track of all blocks
+];
 
-// console.log(blocks);
-
-// {
-//     id: "1741787553322",
-//     block: document.querySelector(`[data-block-id="1740835238140"]`),
-//     category: null,
-//     subcategory: null,
-//     img: http://127.0.0.1:5501/img/js%product%img.png,
-//     name: "Aojiru in blocks",
-//     status: false, 
-//     previewDescriprion: "previewDescr",
-//     mainDescription: "mainDescr"
-// }
-
-
-
-function clearAll() {
-    let itemsSection = document.getElementById("items-section");
-    itemsSection.innerHTML = '';
-};
 
 function createBlock() {
     let itemsSection = document.getElementById("items-section")
@@ -124,7 +115,7 @@ function createBlock() {
     const preview = newBlock.querySelector('.item-container-preview');
     const detailed = newBlock.querySelector('.item-container-d-description');
     creationBlock.style.display = "none"
-    delete imgLink;
+    imgLink = null;
 }
 // createBlock();
 
@@ -148,6 +139,7 @@ document.querySelector("#cancel-creation-btn").onclick = function() {
 // Відкриття блоку для створення категорій
 document.querySelector('#admin-categoryEdit').onclick = function() {
     if (creationBlock.style.display === "none") {
+        document.getElementById("admin-categoryEdit").disabled = true;
         getCategoriesInfo();
         categoryEditBlock.style.display = "block";
     }
@@ -158,8 +150,10 @@ document.querySelector('#admin-categoryEdit').onclick = function() {
 
 //Відміна створення категорій
 document.querySelector('#cancel-categoryEdit-btn').onclick = function() {
+    document.getElementById("admin-categoryEdit").disabled = false;
     categoryEditBlock.style.display = "none";
     clearCategoriesDisplay();
+    
 };
 
 // Відкриття категорій
@@ -328,24 +322,7 @@ async function editBlock(id) {
     saveBtn.onclick = function() {
         
         const saveThisBlock = blocks.find(block => block.id === id.toString());
-  
-        // console.log(id.toString());
 
-        // console.log(saveThisBlock);
-        // console.log(saveThisBlock.img)
-
-        // blocks.push({
-        //     id: id,
-        //     block: newBlock,
-        //     category: category,
-        //     subcategory: subcategory,
-        //     img: imgLink,
-        //     name: blockName,
-        //     status: status, 
-        //     previewDescriprion: previewDescr,
-        //     mainDescription: mainDescr
-        // });
-        // if (saveThisBlock) {
             saveThisBlock.img = newImg;
             console.log(saveThisBlock.img)
             saveThisBlock.name = nameEditInput.value.toString();
@@ -436,258 +413,3 @@ async function logout() {
   }
 }
 
-async function getCategoriesInfo() {
-  const response = await fetch('/api/category/read', {
-    method: 'GET',
-    credentials: 'include'
-  });
-
-  const data = await response.json();
-  console.log(data);
-  data.forEach(category => {
-    console.log(category.name);
-  })
-  data.forEach(car => {
-    const div = document.createElement("div");
-    console.log(car.id);
-    div.innerHTML = `<h3>${car.name}</h3><p>${car.description}</p>
-    <input type="text" style="display: none" id="category-name-${car.id}" placeholder="Category name" value="${car.name}">
-    <input type="text" style="display: none" id="category-descr-${car.id}" placeholder="Category description" value="${car.description}">
-    <button class="admin-btn" style="display: none" id="admin-categorySaveUpdate-btn-${car.id}" onclick="updateCategory(${car.id})">Save</button>
-    <button class="admin-btn" style="display: none" id="admin-categoryCancelUpdate-btn-${car.id}" onclick="cancelUpdateCategory(${car.id})">Cancel</button>
-    <button class="admin-btn" id="admin-update-btn" onclick="editCategory(${car.id})">Edit</button>
-    <button class="admin-btn" style="background-color: brown;" id="admin-del-btn" onclick="deleteCategory(${car.id})">Delete</button>
-    
-    `;
-    div.classList.add('category-block-area');
-    document.querySelector('.categories-display-container').appendChild(div);
-
-  })
-
-}
-
-// async function deleteCookie() {
-//     const response = await fetch('/api/category/deleteCookie', {
-//         method: 'DELETE',
-//         credentials: 'include'
-//     });
-
-//     const result = await response.json();
-//     console.log(result);
-//     if (result.status === 0) {
-//         alert("Cookie deleted successfully");
-//     } else {
-//         alert("Failed to delete cookie: " + (result.error || "Unknown error"));
-//     }
-// }
-
-async function createCategory() {
-    let name = document.getElementById("category-name").value;
-    let description = document.getElementById("category-descr").value;
-    console.log(name);
-    console.log(description);
-    if (name === "" || description === "") {
-        alert("Please fill in all fields");
-        return;
-    }
-    else {
-        const response = await fetch('/api/category/create', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: name,
-                description: description
-            })
-        })
-        const result = await response.json();
-        console.log(result);
-        alert("Category created");
-        updateCategoriesDisplay()
-    }
-
-    // if (result.status === 0) {
-    //     alert("✅ Category created successfully");
-    //     // Optionally reload or update category list:
-    //     clearCategoriesDisplay()
-    //     getCategoriesInfo()
-    // } 
-    // else {
-    //     alert("❌ Failed to create category: " + (result.error || "Unknown error"));
-    // }
-    
-}
-
-function editCategory(categoryId) {
-    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
-    console.log(categoryId);
-    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "block";
-    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "block";
-    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "block";
-    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "block";
-}
-
-async function updateCategory(categoryId) {
-    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
-    let name = categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).value;
-    let description = categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).value;
-    const response = await fetch('/api/category/update', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            id: categoryId,
-            name: name,
-            description: description
-        })
-    })
-    const result = await response.json();
-    console.log(result);
-    alert("Category updated");
-
-    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "none";
-    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
-    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "none";
-    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
-    updateCategoriesDisplay()
-}
-
-function cancelUpdateCategory(categoryId) {
-    let categoriesDisplayContainer = document.querySelector('.categories-display-container');
-    categoriesDisplayContainer.querySelector(`#category-name-${categoryId}`).style.display = "none";
-    categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
-    categoriesDisplayContainer.querySelector(`#admin-categoryCancelUpdate-btn-${categoryId}`).style.display = "none";
-    categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
-}
-
-async function deleteCategory(categoryId) {
-    console.log(categoryId);
-    const response = await fetch('/api/category/delete', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                id: categoryId
-            })
-        })
-        const result = await response.json();
-        console.log(result);
-        alert("Category deleted");
-        updateCategoriesDisplay()
-}
-
-function clearCategoriesDisplay() {
-    document.querySelector('.categories-display-container').innerHTML = '';
-}
-
-function updateCategoriesDisplay() {
-    clearCategoriesDisplay();
-    getCategoriesInfo();
-}
-
-// ITEMS
-
-async function getItemsInfo() {
-  const response = await fetch('/api/item/read', {
-    method: 'GET',
-    credentials: 'include',
-    // body: JSON.stringify({ name: "Router" })
-  });
-
-  const data = await response.json();
-  return data;
-//   console.log(data);
-//   data.forEach(item => {
-//     console.log(item.name);
-//   })
-}
-
-//image upload and refresh
-async function displayItems() { 
-    let itemsSection = document.getElementById("items-section");
-    const itemsList = await getItemsInfo();
-    console.log(itemsList);
-    clearAll()
-    itemsList.forEach(item => {
-
-        const displayBlock = document.createElement('div');
-        displayBlock.className = 'item-container';
-        
-        if (item.status == true) {
-            availability = 'В наявності';
-        }
-        else {
-            availability = 'Немає в наявності';
-        }
-        // <img src="${item.img}" class="item-container-preview-img" id="creation-img-src"></img>
-                                    // <h4 class="item-container-preview-statusBar-status" id="statusBar-status" style="display: block;">${availability}</h4>
-        item.block = displayBlock;
-        displayBlock.innerHTML = `
-        <div class="item-container" data-block-id="${item.id}">
-            <div class="item-container-onclick" onclick="window.location.href='/item.html?id=${item.id}'">
-                <p id="item-id">ID: ${item.id}</p>
-                <div class="item-edit-dropdowns" style="display: none;">
-                    <select class="item-container-preview-statusBar-status" name="mainCategory">
-                        <option>health</option>
-                        <option>beauty</option>
-                    </select>
-                    <select class="item-container-preview-statusBar-status" name="subCategory">
-                        <option>creame</option>
-                        <option>powder</option>
-                    </select>
-                    <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
-                </div>
-                <!-- dropdown edit partially completed -->
-                <div class="item-container-preview" id="item-container-preview"> <!--flex-->
-                    <div class="item-container-preview-img-container">
-                        
-                    </div>
-
-                    <div class="item-container-preview-text"> <!-- Right part -->
-                        <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
-                            <h3 class="item-container-preview-statusBar-title" id="statusBar-title" style="display: block;">${item.name}</h3>
-                            <h3 class="item-container-preview-statusBar-title" id="statusBar-title-edit" style="display: none;">
-                                <input class="preview-title" type="text" id="blockName">
-                            </h3>
-
-                            <h4 class="item-container-preview-statusBar-status" id="statusBar-status-edit" style="display: none;">
-                                <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                    <option value="true">В наявності</option>
-                                    <option value="false">Немає в наявності</option>
-                                </select>
-                            </h4>
-                        </div>
-                        <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
-                            ${item.short_description}
-                        </p>
-                        <p class="item-container-preview-s-descr">
-                            <textarea class="description-input preview-input" name="previewDescr" id="previewDescr" style="display: none;"></textarea>
-                        </p>
-                    </div>
-                </div>
-                <a href="/item.html?id=${item.id}">View Item</a>
-                <div class="item-container-d-description" id="item-container-d-description-div"> <!-- Detailed description / expandable -->
-                    <p id="item-container-d-description-p" style="display: block;">
-                        ${item.long_description}
-                    </p>
-                    <p>
-                        <textarea class="description-input" name="mainDescr" id="mainDescr" style="display: none;"></textarea>
-                    </p>
-                </div>
-                <div style="display: flex; justify-content: flex-start;" id="priceDisplay">
-                    <h2 class="price">₴</h2>
-                    <h2 class="price" id="price">${item.price}</h2>
-                    <h2 class="price" style="margin-left:10px;">грн</h2>
-                </div>
-                <div style="display: none; justify-content: flex-start;" id="priceInputBlock">
-                    <h2 class="price">₴</h2><h2 class="price" style="width: 50%;"><input class="preview-title" type="text" id="priceInput"></h2><h2 class="price" style="margin-left:10px;">грн</h2>
-                </div>
-                <h2><input class="preview-title" type="text" id="priceInput" style="display: none;"></h2>
-            </div>
-            <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${item.id})">Редагувати</button>
-        </div>
-        `;//onclick="shrinkBlock(${item.id})"
-        itemsSection.appendChild(displayBlock)
-
-    })
-    // console.log('finish');
-    
-}
-document.addEventListener("DOMContentLoaded", displayItems);

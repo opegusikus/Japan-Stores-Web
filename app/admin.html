@@ -104,21 +104,14 @@
     <div class="item-container-onclick">
         <div class="item-edit-dropdowns">
             <p>ID: creation</p>
-            <select class="item-container-preview-statusBar-status" name="mainCategory">
-                <option>health</option>
-                <option>beauty</option>
-            </select>
-            <select class="item-container-preview-statusBar-status" name="subCategory">
-                <option>creame</option>
-                <option>powder</option>
-            </select>
+            
             <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
         </div>
             <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                 <div class="item-container-preview-img-container">
                     <img src="/img/js product img.png" class="item-container-preview-img" id="creation-img-src">
                 </div>
-
+                <input type="text" id="category-id" placeholder="ID категорії">
                 <div class="item-container-preview-text"> <!-- Right part -->
                     <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                         <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
@@ -191,6 +184,6 @@
             <div class="admin-add">
                 <button class="admin-btn" id="admin-categoryEdit">Редагувати Категорії</button>
             </div> -->
-    <script src="/js/admin.js"></script>
+    <script type="module" src="/js/admin_js/admin.js"></script>
 </body>
 </html>
