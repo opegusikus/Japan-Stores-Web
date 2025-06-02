@@ -1,5 +1,5 @@
-import { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAll } from './manage_items.js';
-import { getCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelUpdateCategory, clearCategoriesDisplay } from './manage_categories.js';
+import { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAllItems } from './manage_items.js';
+import { displayCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelEditCategory, clearCategoriesDisplay } from './manage_categories.js';
 
 document.getElementById('save-creation-btn').addEventListener('click', () => {
     createItem();
@@ -7,6 +7,7 @@ document.getElementById('save-creation-btn').addEventListener('click', () => {
 document.getElementById('categoryEdit-add-btn').addEventListener('click', () => {
     createCategory();
 });
+
 
 
 var editMode = false;
@@ -31,34 +32,6 @@ let blocks = [
     rating: null,
     quantity: null,
     price: 600
-},
-{
-    id: "1740835238141",
-    block: document.querySelector(`[data-block-id="1740835238141"]`),
-    category: null,
-    subcategory: null,
-    img: "/img/Background.jpg",
-    name: "Aojiru in blocks",
-    status: false, 
-    previewDescriprion: "previewDescr",
-    mainDescription: "mainDescr",
-    rating: null,
-    quantity: null,
-    price: 100009
-},
-{
-    id: "1740835238142",
-    block: document.querySelector(`[data-block-id="1740835238142"]`),
-    category: null,
-    subcategory: null,
-    img: "/img/photo_2024-12-29_18-43-55.png",
-    name: "Aojiru in blocks",
-    status: false, 
-    previewDescriprion: "previewDescr",
-    mainDescription: "mainDescr",
-    rating: null,
-    quantity: null,
-    price: 10
 }
 ];
 
@@ -125,6 +98,8 @@ document.getElementById('save-creation-btn').addEventListener('click', createBlo
 document.querySelector('#admin-add').onclick = function() {
     if (categoryEditBlock.style.display === "none") {
         creationBlock.style.display = "block";
+        // var markupStr = $('#summernote').summernote('code');
+        // console.log(markupStr);
     }
     else {
         creationBlock.style.display = "none";
@@ -140,7 +115,7 @@ document.querySelector("#cancel-creation-btn").onclick = function() {
 document.querySelector('#admin-categoryEdit').onclick = function() {
     if (creationBlock.style.display === "none") {
         document.getElementById("admin-categoryEdit").disabled = true;
-        getCategoriesInfo();
+        displayCategoriesInfo();
         categoryEditBlock.style.display = "block";
     }
     else {
@@ -176,14 +151,6 @@ document.getElementById('creation-input-file').addEventListener('change', functi
 });
 });
 
-// Set up existing blocks (if any) for extention
-// document.querySelectorAll('.item-container-onclick').forEach(preview => {
-//     const content = preview.nextElementSibling;
-//     preview.addEventListener('click', () => {
-//         content.classList.toggle('active');
-//     });
-// });
-
 // Close blocks when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.item-container') && editMode === false) {
@@ -192,24 +159,6 @@ document.addEventListener('click', (e) => {
         });
     }
 });
-
-// Add click event listener to created preview for extention
-// function extendBlock(id) {
-//     const block = document.querySelector(`[data-block-id="${id}"]`);
-//     const content = block.querySelector('.item-container-d-description');
-//     if (!content.classList.contains('active') && editMode === false) {
-//         content.classList.add('active');
-//     }
-// }
-
-// //remove extention
-// function shrinkBlock(id) {
-//     if (editMode === false) {
-//         const block = document.querySelector(`[data-block-id="${id}"]`);
-//         const content = block.querySelector('.item-container-d-description');
-//         content.classList.remove('active');
-//     }
-// }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function editBlock(id) {
@@ -397,19 +346,26 @@ async function editBlock(id) {
 };
 
 
-async function logout() {
-  const res = await fetch('/logout', {
-    method: 'POST',
-    credentials: 'include'
-  });
 
-  const result = await res.json();
 
-  if (result.status === 0) {
-    alert('Вихід виконано успішно');
-    window.location.href = '/'; // або на сторінку логіну
-  } else {
-    alert('Помилка при виході');
-  }
-}
+
+
+
+
+
+// async function logout() {
+//   const res = await fetch('/logout', {
+//     method: 'POST',
+//     credentials: 'include'
+//   });
+
+//   const result = await res.json();
+
+//   if (result.status === 0) {
+//     alert('Вихід виконано успішно');
+//     window.location.href = '/'; // або на сторінку логіну
+//   } else {
+//     alert('Помилка при виході');
+//   }
+// }
 

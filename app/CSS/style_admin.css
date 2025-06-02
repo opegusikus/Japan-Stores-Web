@@ -27,7 +27,7 @@
         height: 64px;
     }
     .img-input {
-        width: 88px;
+        width: 16em;
     }
 
     .preview-title {
@@ -53,7 +53,7 @@
         display: none;
     } */
 
-    .item-edit-dropdowns {
+    .item-container-preview-statusBar-status {
         display:flex; 
         align-items:center; 
         justify-content:space-evenly; 
@@ -88,7 +88,7 @@
         margin: 0;
         text-align: start;
         max-width: 768px;
-        z-index: 10000;
+        z-index: 1;
     }
 
     .admin-btn {
@@ -107,7 +107,7 @@
         height: 64px;
     }
     .img-input {
-        width: 88px;
+        width: 10em;
     }
 
     .preview-title {
@@ -125,7 +125,7 @@
         margin: auto;
     }
 
-    .item-edit-dropdowns {
+    .item-container-preview-statusBar-status {
         display:flex; 
         align-items:center; 
         justify-content:space-evenly; 

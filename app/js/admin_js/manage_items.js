@@ -12,6 +12,8 @@ async function getItemsInfo() {
 async function createItem() {
     let categoryId = document.querySelector('#category-id').value; // Replace with actual category ID or logic to get it
     let nameEditInput = document.querySelector('#blockName');
+    let markupStr = $('#summernote').summernote('code');
+    console.log(markupStr);
     const response = await fetch('/api/item/create', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -19,14 +21,14 @@ async function createItem() {
             category_id: 139,
             name: nameEditInput.value,
             short_description: "Short description of the new item",
-            long_description: "Long description of the new item",
+            long_description: markupStr,
             price: 100,
         })
     });
     const data = await response.json();
     console.log(data);
     alert("Item created");
-    clearAll();
+    clearAllItems();
     displayItems();
 }
 
@@ -45,7 +47,7 @@ async function deleteItem(itemId) {
     const data = await response.json();
     console.log(data);
     alert("Item deleted");
-    clearAll();
+    clearAllItems();
     displayItems();
 }
 
@@ -54,18 +56,12 @@ async function displayItems() {
     let itemsSection = document.getElementById("items-section");
     const itemsList = await getItemsInfo();
     console.log(itemsList);
-    clearAll()
+    clearAllItems();
     itemsList.forEach(item => {
 
         const displayBlock = document.createElement('div');
         displayBlock.className = 'item-container';
         
-        if (item.status == true) {
-            availability = 'В наявності';
-        }
-        else {
-            availability = 'Немає в наявності';
-        }
         // <img src="${item.img}" class="item-container-preview-img" id="creation-img-src"></img>
                                     // <h4 class="item-container-preview-statusBar-status" id="statusBar-status" style="display: block;">${availability}</h4>
         item.block = displayBlock;
@@ -75,14 +71,6 @@ async function displayItems() {
                 <p id="item-id">ID: ${item.id}</p>
                 
                 <div class="item-edit-dropdowns" style="display: none;">
-                    <select class="item-container-preview-statusBar-status" name="mainCategory">
-                        <option>health</option>
-                        <option>beauty</option>
-                    </select>
-                    <select class="item-container-preview-statusBar-status" name="subCategory">
-                        <option>creame</option>
-                        <option>powder</option>
-                    </select>
                     <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
                 </div>
                 <!-- dropdown edit partially completed -->
@@ -133,20 +121,22 @@ async function displayItems() {
                 <h2><input class="preview-title" type="text" id="priceInput" style="display: none;"></h2>
             </div>
             <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${item.id})">Редагувати</button>
-            <button class="admin-btn" id="admin-edit-btn" onclick="deleteItem(${item.id})">Видалити</button>
+            <button class="admin-btn" id="admin-edit-btn-${item.id}">Видалити</button>
         </div>
         `;//onclick="shrinkBlock(${item.id})"
         itemsSection.appendChild(displayBlock)
-
+        document.getElementById(`admin-edit-btn-${item.id}`).addEventListener('click', function() {
+            deleteItem(item.id);
+        });
     })
     // console.log('finish');
     
 }
 document.addEventListener("DOMContentLoaded", displayItems);
 
-function clearAll() {
+function clearAllItems() {
     let itemsSection = document.getElementById("items-section");
     itemsSection.innerHTML = '';
 };
 
-export { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAll };
+export { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAllItems };
