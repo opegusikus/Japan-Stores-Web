@@ -1,4 +1,7 @@
 // ITEMS
+// import { response } from 'express';
+import { getCategoriesInfo } from './manage_categories.js';
+
 async function getItemsInfo() {
   const response = await fetch('/api/item/read', {
     method: 'GET',
@@ -9,8 +12,54 @@ async function getItemsInfo() {
   return data;
 }
 
+async function getItemsInfoByCategory() {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = (ret) => {console.log(ret);};
+    xhr.open('POST', 'api/item/read');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = () => {
+    if (xhr.status === 200) {
+      try {
+        const response = JSON.parse(xhr.responseText); // ⬅️ Зберігаєш відповідь у змінну
+        console.log('Отримані дані:', response);
+
+        // Наприклад, зберегти в іншу змінну:
+        const items = response.items || response; // або адаптуй під свою структуру
+        // далі можеш використовувати items
+      } catch (e) {
+        console.error('Помилка парсингу JSON:', e);
+      }
+    } else {
+      console.error('Помилка запиту:', xhr.status, xhr.statusText);
+    }
+  };
+
+  xhr.onerror = () => {
+    console.error('Помилка мережі або сервера');
+  };
+
+  xhr.send(JSON.stringify({ category_id: 139 }));
+};
+
+//     const response = await fetch('./api/item/read', {
+//     method: 'GET',
+//     // credentials: 'include',
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({"category_id":139}), // body data type must match "Content-Type" header
+//   });
+//   const data = await response.json();
+//   console.log(data);
+
+getItemsInfoByCategory()
+
 async function createItem() {
-    let categoryId = document.querySelector('#category-id').value; // Replace with actual category ID or logic to get it
+    let categoryId = document.getElementById('category-id').value; // Replace with actual category ID or logic to get it
+    if (!categoryId) {
+        alert("Please select a category before creating an item.");
+        return;
+    }
     let nameEditInput = document.querySelector('#blockName');
     let markupStr = $('#summernote').summernote('code');
     console.log(markupStr);
@@ -18,7 +67,7 @@ async function createItem() {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            category_id: 139,
+            category_id: categoryId,
             name: nameEditInput.value,
             short_description: "Short description of the new item",
             long_description: markupStr,
@@ -28,8 +77,7 @@ async function createItem() {
     const data = await response.json();
     console.log(data);
     alert("Item created");
-    clearAllItems();
-    displayItems();
+    updateItemsDisplay()
 }
 
 async function updateItem(itemId) {
@@ -45,18 +93,19 @@ async function deleteItem(itemId) {
         })
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     alert("Item deleted");
-    clearAllItems();
-    displayItems();
+    updateItemsDisplay()
 }
 
 //image upload and refresh
 async function displayItems() { 
     let itemsSection = document.getElementById("items-section");
     const itemsList = await getItemsInfo();
+    const categoriesList = await getCategoriesInfo();
     console.log(itemsList);
-    clearAllItems();
+    console.log(categoriesList);
+    // clearAllItems();
     itemsList.forEach(item => {
 
         const displayBlock = document.createElement('div');
@@ -69,6 +118,7 @@ async function displayItems() {
         <div class="item-container" data-block-id="${item.id}">
             <div class="item-container-onclick" onclick="window.location.href='/item.html?id=${item.id}'">
                 <p id="item-id">ID: ${item.id}</p>
+                <p id="item-category-id">Category ID: ${item.category_id}</p>
                 
                 <div class="item-edit-dropdowns" style="display: none;">
                     <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
@@ -134,9 +184,14 @@ async function displayItems() {
 }
 document.addEventListener("DOMContentLoaded", displayItems);
 
+function updateItemsDisplay() {
+    clearAllItems();
+    displayItems();
+};
+
 function clearAllItems() {
     let itemsSection = document.getElementById("items-section");
     itemsSection.innerHTML = '';
 };
 
-export { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAllItems };
+export { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAllItems, updateItemsDisplay };

@@ -1,3 +1,4 @@
+import { updateItemsDisplay } from './manage_items.js';
 
 // Get categories info from the server and display them
 async function getCategoriesInfo() {
@@ -7,10 +8,10 @@ async function getCategoriesInfo() {
   });
 
   const data = await response.json();
-  console.log(data);
-  data.forEach(category => {
-    console.log(category.name);
-  })
+//   console.log(data);
+//   data.forEach(category => {
+//     console.log(category.name);
+//   })
   return data;
 };
 
@@ -61,13 +62,19 @@ async function displayCategoriesInfo() {
 
 async function displayCategoriesForItemCreation() {
     const data = await getCategoriesInfo();
+    let categoriesSelectionCreation = document.getElementById("category-id")
+    let categoriesSelectionDisplay = document.getElementById("admin-select-display-byCategory");
     data.forEach(category => {
-        var categoriesDropdown = document.getElementById("category-id")
         const option = document.createElement("option");
+        const option2 = document.createElement("option");
         option.value = category.id;
         option.textContent = category.name + " (ID: " + category.id + ", " + category.description + ")";
-        categoriesDropdown.appendChild(option);
+        option2.value = category.id;
+        option2.textContent = category.name + " (ID: " + category.id + ", " + category.description + ")";
+        categoriesSelectionCreation.appendChild(option);
+        categoriesSelectionDisplay.appendChild(option2);
     });
+    categoriesSelectionDisplay.value = "all";
 }
 displayCategoriesForItemCreation()
 
@@ -107,7 +114,7 @@ async function createCategory() {
         const result = await response.json();
         console.log(result);
         alert("Category created");
-        updateCategoriesDisplay()
+        updateCategoriesDisplay();
     }
 
     // if (result.status === 0) {
@@ -153,7 +160,8 @@ async function updateCategory(categoryId) {
     categoriesDisplayContainer.querySelector(`#category-descr-${categoryId}`).style.display = "none";
     categoriesDisplayContainer.querySelector(`#admin-categorycancelEdit-btn-${categoryId}`).style.display = "none";
     categoriesDisplayContainer.querySelector(`#admin-categorySaveUpdate-btn-${categoryId}`).style.display = "none";
-    updateCategoriesDisplay()
+    updateCategoriesDisplay();
+    updateItemsDisplay();
 }
 // Cancel category update
 function cancelEditCategory(categoryId) {
@@ -197,4 +205,4 @@ function updateCategoriesDisplay() {
     displayCategoriesForItemCreation();
 }
 
-export { displayCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelEditCategory, clearCategoriesDisplay };
+export { displayCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelEditCategory, clearCategoriesDisplay, getCategoriesInfo };

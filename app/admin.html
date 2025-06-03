@@ -96,6 +96,11 @@
     <section>
         <div class="admin-contorol-panel" >
             <div class="admin-add">
+                <select class="admin-select" id="admin-select-display-byCategory">
+                    <option value="all">Всі товари</option>
+                </select>
+            </div>
+            <div class="admin-add">
                 <button class="admin-btn" id="admin-add">Додати товар</button>
             </div>
             <div class="admin-add">
@@ -113,29 +118,28 @@
     <div class="item-container-onclick">
         <div class="item-edit-dropdowns">
             <p>ID: creation</p>
-            
+            <select id="category-id" class="item-edit-dropdowns">
+
+                </select>
             <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
         </div>
             <div class="item-container-preview" id="item-container-preview"> <!--flex-->
+                
                 <div class="item-container-preview-img-container">
                     <img src="/img/js product img.png" class="item-container-preview-img" id="creation-img-src">
                 </div>
                 <!-- <input type="text" id="category-id-NOTINUSEFORNOW" placeholder="ID категорії"> -->
-                <select id="category-id" class="item-edit-dropdowns">
-
-                </select>
+                
                 <div class="item-container-preview-text"> <!-- Right part -->
                     <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
-                        <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName"></h3>
+                        <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName" placeholder="Назва"></h3>
                         <h4 class="item-container-preview-statusBar-status">
                             <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                <option value="true">В наявності</option>
-                                <option value="false">Немає в наявності</option>
                             </select>
                         </h4>
                     </div>
                     <p class="item-container-preview-s-descr"> <!-- Short description -->
-                        <textarea class="description-input preview-input" name="previewDescr" id="previewDescr"></textarea>
+                        <textarea class="description-input preview-input" name="previewDescr" id="previewDescr" placeholder="Опис прев'ю"></textarea>
                     </p>
                 </div>
             </div>
