@@ -160,8 +160,12 @@ document.addEventListener('click', (e) => {
     }
 });
 
+  document.getElementById("menuToggle").addEventListener("click", function() {
+    document.body.classList.toggle("no-scroll");
+  });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function editBlock(id) {
+async function editItem2(id) {
     const itemsList = await getItemsInfo();
     editMode = true;
     const itemBlock = document.querySelector(`[data-block-id="${id}"]`);

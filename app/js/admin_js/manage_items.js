@@ -52,7 +52,7 @@ async function getItemsInfoByCategory() {
 //   const data = await response.json();
 //   console.log(data);
 
-getItemsInfoByCategory()
+// getItemsInfoByCategory()
 
 async function createItem() {
     let categoryId = document.getElementById('category-id').value; // Replace with actual category ID or logic to get it
@@ -102,9 +102,9 @@ async function deleteItem(itemId) {
 async function displayItems() { 
     let itemsSection = document.getElementById("items-section");
     const itemsList = await getItemsInfo();
-    const categoriesList = await getCategoriesInfo();
+    // const categoriesList = await getCategoriesInfo();
     console.log(itemsList);
-    console.log(categoriesList);
+    // console.log(categoriesList);
     // clearAllItems();
     itemsList.forEach(item => {
 
@@ -170,18 +170,25 @@ async function displayItems() {
                 </div>
                 <h2><input class="preview-title" type="text" id="priceInput" style="display: none;"></h2>
             </div>
-            <button class="admin-btn" id="admin-edit-btn" onclick="editBlock(${item.id})">Редагувати</button>
-            <button class="admin-btn" id="admin-edit-btn-${item.id}">Видалити</button>
+            <button class="admin-btn" id="admin-edit-btn-${item.id}">Редагувати</button>
+            <button class="admin-btn" id="admin-delete-btn-${item.id}">Видалити</button>
         </div>
         `;//onclick="shrinkBlock(${item.id})"
         itemsSection.appendChild(displayBlock)
-        document.getElementById(`admin-edit-btn-${item.id}`).addEventListener('click', function() {
+         document.getElementById(`admin-edit-btn-${item.id}`).addEventListener('click', function() {
+            editItem(item.id);
+        });
+        document.getElementById(`admin-delete-btn-${item.id}`).addEventListener('click', function() {
             deleteItem(item.id);
         });
     })
     // console.log('finish');
+}
+
+function editItem(id) {
     
 }
+
 document.addEventListener("DOMContentLoaded", displayItems);
 
 function updateItemsDisplay() {

@@ -5,7 +5,12 @@
     --mainBlack: #01060d;
     --nonActiveGray: #72757a;
     --standart-fontWeight: 400;
+    --standart-small-fontSize: 12px;
+    --standart-middle-fontSize: 16px;
     --standart-fontSize: 18px;
+    --mobile-small-fontSize: 8px;
+    --mobile-middle-fontSize: 12px;
+    --mobile-large-fontSize: 16px;
   }
 
 body {
@@ -512,8 +517,6 @@ button:focus {
         list-style-type: none;
       }
       
-      
-      
       .container {
         margin-top: 50px; 
         Display: flex;
@@ -534,7 +537,10 @@ button:focus {
         /* background-color: #1E1E23; */
         height: 65px;
       }
-      
+
+    body.no-scroll {
+        margin: 0; height: 100%; overflow: hidden
+    }
       
       #menuToggle {
         display: flex;
@@ -608,9 +614,10 @@ button:focus {
       {
         position: fixed;
         width: 100%;
-        height: 100vh;
+        height: 110vh;
         box-shadow: 0 0 3px #85888C;
-        margin: -50px 0 0 -50px;
+        /* margin: -50px 0 0 -50px; */
+        margin: -50px 0 0 -25px;
         padding: 50px;
         padding-top: 125px;
         background-color: var(--mainWhite);
@@ -651,10 +658,11 @@ button:focus {
         font-size: 28px;
         color: var(--mainBlack);
         margin: 24px 12px 2px 32px;
+        
     }
     
     .header-title-box {
-        z-index: 103;
+        z-index: 1000;
         display: flex;
     }
 
