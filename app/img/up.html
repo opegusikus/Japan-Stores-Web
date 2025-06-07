@@ -83,7 +83,7 @@
 
         await new Promise((resolve) => {
           const xhr = new XMLHttpRequest();
-          xhr.open('POST', '/upload');
+          xhr.open('POST', '/img/upload');
 
           xhr.upload.addEventListener('progress', (e) => {
             if (e.lengthComputable) {
