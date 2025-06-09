@@ -1,4 +1,4 @@
-import { getItemsInfo, displayItems, createItem, updateItem, deleteItem, clearAllItems } from './manage_items.js';
+import { getItemsInfoByParam, displayItems, createItem, updateItem, deleteItem, clearAllItems } from './manage_items.js';
 import { displayCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelEditCategory, clearCategoriesDisplay } from './manage_categories.js';
 
 document.getElementById('save-creation-btn').addEventListener('click', () => {
@@ -8,8 +8,7 @@ document.getElementById('categoryEdit-add-btn').addEventListener('click', () => 
     createCategory();
 });
 
-
-
+document.getElementById('update_display').addEventListener('click', displayItems)
 var editMode = false;
 let creationBlock = document.getElementById("creation-block");
 let categoryEditBlock = document.getElementById("edit-categories");
@@ -92,7 +91,7 @@ function createBlock() {
 }
 // createBlock();
 
-document.getElementById('save-creation-btn').addEventListener('click', createBlock);
+// document.getElementById('save-creation-btn').addEventListener('click', createBlock);
 
 // Відкриття блоку для створення товару 
 document.querySelector('#admin-add').onclick = function() {

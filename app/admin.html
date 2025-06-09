@@ -66,8 +66,8 @@
                     <a href="#" onclick="return false;" class="nav-btn-link" ><div class="nav-btn-container" id="nav-btn-link-categories"><h3 class="nav-btn">Категорії</h3></div></a>
                 </nav>
             <div class="items-nav-search">
-                <input type="text" placeholder="Пошук" class="items-nav-search-input">
-                <button class="items-nav-search-btn"><svg style="display:flex; " width="24" height="24" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <input type="text" placeholder="Пошук" class="items-nav-search-input" id="items-nav-search-input">
+                <button class="items-nav-search-btn" id="items-nav-search-btn"><svg style="display:flex; " width="24" height="24" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M32 32L24.75 24.75M28.6667 15.3333C28.6667 22.6971 22.6971 28.6667 15.3333 28.6667C7.96954 28.6667 2 22.6971 2 15.3333C2 7.96954 7.96954 2 15.3333 2C22.6971 2 28.6667 7.96954 28.6667 15.3333Z" stroke="#1E1E1E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
                   </svg></button>
             </div>
@@ -97,8 +97,11 @@
         <div class="admin-contorol-panel" >
             <div class="admin-add">
                 <select class="admin-select" id="admin-select-display-byCategory">
-                    <option value="all">Всі товари</option>
+                    <option value="null" selected>Всі товари</option>
                 </select>
+            </div>
+            <div class="admin-add">
+                <button class="admin-btn" id="update_display">Оновити</button>
             </div>
             <div class="admin-add">
                 <button class="admin-btn" id="admin-add">Додати товар</button>
@@ -166,7 +169,7 @@
         <p id="categories-display"></p>
         <input type="text" id="category-name" placeholder="Назва категорії">
         <input type="text" id="category-descr" placeholder="Опис категорії">
-        <button class="admin-btn" id="categoryEdit-add-btn" onclick="createCategory()">Додати</button>
+        <button class="admin-btn" id="categoryEdit-add-btn">Додати</button>
         <div class="categories-display-container">
 
         </div>
