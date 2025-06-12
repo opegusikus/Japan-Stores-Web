@@ -16,6 +16,9 @@ async function getCategoriesInfo() {
 };
 
 async function displayCategoriesInfo() {
+    const select = document.getElementById('customSelect');
+    const header = document.getElementById('selectHeader');
+    const options = document.getElementById('options');
     const data = await getCategoriesInfo();
     console.log(data);
     data.forEach(category => {
@@ -57,8 +60,52 @@ async function displayCategoriesInfo() {
     deleteBtn.addEventListener('click', function() {
         deleteCategory(category.id);
     });
-    })
+
+    // Custom select dropdown functionality
+    // ------------------------------------
+
+        // const optionItems = options.querySelectorAll('.option');
+        // options.innerHTML = '';
+        const option = document.createElement('div');
+        option.classList.add('option');
+        option.textContent = category.name;
+        option.dataset.id = category.id;
+
+        // Встановлюємо першу опцію як початкову
+        // if (option.length > 0) {
+        // header.textContent = option[0].textContent;
+        // }
+
+        // Дія при натисканні
+        option.addEventListener('click', () => {
+            header.textContent = category.name;
+            options.classList.remove('show');
+        });
+        options.appendChild(option);
+      
+        // 3. Встановлюємо першу як обрану
+        if (data.length > 0) {
+            header.textContent = data[0].name;
+        }
+
+        // Показати / сховати список
+        header.addEventListener('click', () => {
+            options.classList.toggle('show');
+            console.log(options);
+        });
+        // Закриваємо селект при кліку поза ним
+        document.addEventListener('click', (e) => {
+        if (!select.contains(e.target)) {
+            options.classList.remove('show');
+        }
+        });
+    // ------------------------------------
+})
+
+    
 }
+
+displayCategoriesInfo();
 
 async function displayCategoriesForItemCreation() {
     const data = await getCategoriesInfo();
@@ -76,7 +123,7 @@ async function displayCategoriesForItemCreation() {
     });
     categoriesSelectionDisplay.value = "all";
 }
-displayCategoriesForItemCreation()
+// displayCategoriesForItemCreation()
 
 // async function deleteCookie() {
 //     const response = await fetch('/api/category/deleteCookie', {

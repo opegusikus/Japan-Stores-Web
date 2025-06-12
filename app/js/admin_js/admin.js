@@ -114,7 +114,7 @@ document.querySelector("#cancel-creation-btn").onclick = function() {
 document.querySelector('#admin-categoryEdit').onclick = function() {
     if (creationBlock.style.display === "none") {
         document.getElementById("admin-categoryEdit").disabled = true;
-        displayCategoriesInfo();
+        // displayCategoriesInfo();
         categoryEditBlock.style.display = "block";
     }
     else {
@@ -126,7 +126,7 @@ document.querySelector('#admin-categoryEdit').onclick = function() {
 document.querySelector('#cancel-categoryEdit-btn').onclick = function() {
     document.getElementById("admin-categoryEdit").disabled = false;
     categoryEditBlock.style.display = "none";
-    clearCategoriesDisplay();
+    updateCategoriesDisplay();
     
 };
 
@@ -371,4 +371,5 @@ async function editItem2(id) {
 //     alert('Помилка при виході');
 //   }
 // }
+
 

@@ -1062,5 +1062,52 @@ button:focus {
     } */
     }
     
-    
-    
+    /* custom select filter by category */
+
+    .custom-select {
+      position: relative;
+      width: 200px;
+      user-select: none;
+    }
+
+    .select-header {
+      background-color: white;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .select-header:hover {
+      border-color: #888;
+    }
+
+    .options {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 100;
+    }
+
+    .option {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e0e0e0;
+    }
+
+    .show {
+      display: block;
+    }
+
+    /*/ custom select filter by category */
