@@ -314,8 +314,10 @@ button:focus {
 } */
 
 .item-container-preview-img {
-    max-width: 140px;
-    max-height: 140px;
+    /* max-width: 140px; */
+    /* max-height: 140px; */
+    width: 140px;
+    height: 140px;
 }
 
 .item-container-preview-text {

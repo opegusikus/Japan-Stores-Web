@@ -1,11 +1,14 @@
-import { updateItemsDisplay } from './manage_items.js';
+import { updateItemsDisplay, getItemsInfoByCategory } from './manage_items.js';
+
+// let categoriesCache = null;
 
 // Get categories info from the server and display them
 async function getCategoriesInfo() {
-  const response = await fetch('/api/category/read', {
-    method: 'GET',
-    credentials: 'include'
-  });
+    // if (categoriesCache) return categoriesCache;
+    const response = await fetch('/api/category/read', {
+        method: 'GET',
+        credentials: 'include'
+    });
 
   const data = await response.json();
 //   console.log(data);
@@ -110,14 +113,15 @@ async function displayCategoriesInfo() {
 document.addEventListener('DOMContentLoaded', () => {
   displayCategoriesInfo();
   displayCategoriesForItemCreation();
+//   displayCategoriesForItemEdit();
 });
 
 
 
 
-async function displayCategoriesForItemCreation() {
+async function displayCategoriesForItemCreation() { //select only for admin inside item creation
     const data = await getCategoriesInfo();
-    let categoriesSelectionCreation = document.getElementById("category-id")
+    let categoriesSelectionCreation = document.getElementById("category-id-creation");
     // console.log(categoriesSelectionCreation);
     data.forEach(category => {
         const option = document.createElement("option");
@@ -242,7 +246,7 @@ function clearCategoriesDisplay() {
 }
 
 function clearCategoriesListForCreation() {
-    let categoriesDropdown = document.getElementById("category-id");
+    let categoriesDropdown = document.getElementById("category-id-creation");
     while (categoriesDropdown.firstChild) {
         categoriesDropdown.removeChild(categoriesDropdown.firstChild);
     }

@@ -82,14 +82,17 @@ async function createItem() {
     let categoryId = document.getElementById('category-id').value; // Replace with actual category ID or logic to get it
     let short_description = document.getElementById('previewDescr').value;
     let imgSrc = document.getElementById('item-creation-img-src-input').value; // Replace with actual image source logic
-    if (!categoryId) {
-        alert("Please select a category before creating an item.");
-        return;
-    }
     let nameEditInput = document.querySelector('#blockName');
     let markupStr = $('#summernote').summernote('code');
-    // console.log(markupStr);
-    const response = await fetch('/api/item/create', {
+    let price = document.getElementById('priceInput').value;
+    let quantity = document.getElementById('item-creation-quantityInput').value;
+    console.log(markupStr);
+    if (!categoryId  || categoryId === "null" || short_description === "" || markupStr === "<p><br></p>" || imgSrc === "" || quantity === "" || price === "") {
+        alert("Please enter all required fields: category, short description, image URL etc.");
+        return;
+    }
+    else {
+        const response = await fetch('/api/item/create', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -97,19 +100,37 @@ async function createItem() {
             category_id: categoryId,
             short_description: short_description,
             long_description: markupStr,
-            price: 100,
+            price: price,
             image_url: imgSrc,
-            availability: 10
+            availability: quantity
         })
     });
     const data = await response.json();
     console.log(data);
     alert("Item created");
     updateItemsDisplay()
+    }
 }
 
-async function updateItem(itemId) {
-    return null;
+async function updateItem(id) {
+    const response = await fetch('/api/item/update', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },//
+        body: JSON.stringify({
+            id: id,
+            name: 'nameEditInput.value',
+            category_id: 139,
+            short_description: 'short_description',
+            long_description: 'markupStr',
+            price: 228,
+            image_url: 'https://js.x.ks.ua/img/3467b654b3d189c5d7430e5cd0dc189d84d4c0221a365bf3688a7ce16a68cb1c.png',
+            availability: 228
+        })
+    })
+    const result = await response.json();
+    console.log(result);
+    alert("Item updated");
+    updateItemsDisplay();
 }
 
 async function deleteItem(itemId) {
@@ -145,29 +166,15 @@ async function displayItems() {
             <div class="item-container-onclick" onclick="window.location.href='/item.html?id=${item.id}'">
                 <p id="item-id">ID: ${item.id}</p>
                 <p id="item-category-id">Category ID: ${item.category_id}</p>
-                
-                <div class="item-edit-dropdowns" style="display: none;">
-                    <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
-                </div>
-                <!-- dropdown edit partially completed -->
+
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     <div class="item-container-preview-img-container">
-                        
+                        <img scr="${item.image_url}" class="item-container-preview-img">
                     </div>
 
                     <div class="item-container-preview-text"> <!-- Right part -->
                         <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                             <h3 class="item-container-preview-statusBar-title" id="statusBar-title" style="display: block;">${item.name}</h3>
-                            <h3 class="item-container-preview-statusBar-title" id="statusBar-title-edit" style="display: none;">
-                                <input class="preview-title" type="text" id="blockName">
-                            </h3>
-
-                            <h4 class="item-container-preview-statusBar-status" id="statusBar-status-edit" style="display: none;">
-                                <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                    <option value="true">В наявності</option>
-                                    <option value="false">Немає в наявності</option>
-                                </select>
-                            </h4>
                         </div>
                         <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
                             ${item.short_description}
@@ -182,31 +189,35 @@ async function displayItems() {
                     <p id="item-container-d-description-p" style="display: block;">
                         ${item.long_description}
                     </p>
-                    <p>
-                        <textarea class="description-input" name="mainDescr" id="mainDescr" style="display: none;"></textarea>
-                    </p>
                 </div>
                 <div style="display: flex; justify-content: flex-start;" id="priceDisplay">
                     <h2 class="price">₴</h2>
                     <h2 class="price" id="price">${item.price}</h2>
                     <h2 class="price" style="margin-left:10px;">грн</h2>
                 </div>
-                <div style="display: none; justify-content: flex-start;" id="priceInputBlock">
-                    <h2 class="price">₴</h2><h2 class="price" style="width: 50%;"><input class="preview-title" type="text" id="priceInput"></h2><h2 class="price" style="margin-left:10px;">грн</h2>
-                </div>
             </div>
             <button class="admin-btn" id="admin-edit-btn-${item.id}">Редагувати</button>
             <button class="admin-btn" id="admin-delete-btn-${item.id}">Видалити</button>
         `;//onclick="shrinkBlock(${item.id})"
         itemsSection.appendChild(displayBlock)
-         document.getElementById(`admin-edit-btn-${item.id}`).addEventListener('click', function() {
+        document.getElementById(`admin-edit-btn-${item.id}`).addEventListener('click', function() {
             editItem(item.id);
         });
         document.getElementById(`admin-delete-btn-${item.id}`).addEventListener('click', function() {
             deleteItem(item.id);
         });
     })
-    // console.log('finish');
+}
+
+async function displayCategoriesForItemEdit() { //select for every item inside item edit
+    const data = await getCategoriesInfo();
+    let categoriesSelectionEdit = document.getElementById("category-id")
+    data.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name + " (ID: " + category.id + ", " + category.description + ")";
+        categoriesSelectionEdit.appendChild(option);
+    });
 }
 
 function editItem(id) {
@@ -215,23 +226,20 @@ function editItem(id) {
     const editWorkspace = document.createElement('div');
     editWorkspace.className = 'item-edit-workspace';
     editWorkspace.innerHTML = `
-    <div style="display: flex;" >
-        <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
-        <img src="/static/app/img/edit-icon.png" alt="Edit Icon">
-    </div>
-    <div class="item-container" id="creation-block">
+    <div class="item-container" id="edit-block">
         <div class="item-container-onclick">
             <div class="item-edit-dropdowns">
-                <p>ID: creation</p>
+                <p>ID: ${id} editing</p>
                     <select id="category-id" class="item-edit-dropdowns">
 
                     </select>
-                <input type='file' class="img-input" id="creation-input-file" accept="image/*"/>
+                <input type='file' class="img-input" id="edit-input-file" accept="image/*"/>
+                 <input type="text" id="item-edit-img-src-input" placeholder="Посилання на зображення" class="img-input">
             </div>
                 <div class="item-container-preview" id="item-container-preview"> <!--flex-->
                     
                     <div class="item-container-preview-img-container">
-                        <img src="/img/js product img.png" class="item-container-preview-img" id="creation-img-src">
+                        <img src="/img/js product img.png" class="item-container-preview-img" id="edit-img-src">
                     </div>
                     <!-- <input type="text" id="category-id-NOTINUSEFORNOW" placeholder="ID категорії"> -->
                     
@@ -239,8 +247,7 @@ function editItem(id) {
                         <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                             <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName" placeholder="Назва"></h3>
                             <h4 class="item-container-preview-statusBar-status">
-                                <select class="item-container-preview-statusBar-status" name="status" id="status">
-                                </select>
+                                <input type="text" class="" id="item-edit-quantityInput" placeholder="Кількість" style="width: 128px; text-align: center;">
                             </h4>
                         </div>
                         <p cl   ass="item-container-preview-s-descr"> <!-- Short description -->
@@ -260,13 +267,15 @@ function editItem(id) {
                 </div>
                 <button class="item-container-expand-btn" id="item-container-expand-btn">...</button>
         </div>
-        <button class="admin-btn" id="save-creation-btn">Зберегти</button>
-        <button class="admin-btn" id="cancel-creation-btn">Атмєна</button>  
+        <button class="admin-btn" id="save-edit-btn">Зберегти</button>
+        <button class="admin-btn" id="cancel-edit-btn">Атмєна</button>  
     </div>
-
     `;
 
     itemBlock.appendChild(editWorkspace);
+    itemBlock.querySelector('#save-edit-btn').addEventListener('click', () => updateItem(id));
+    console.log(itemBlock.querySelector('#save-edit-btn'));
+    displayCategoriesForItemEdit();
 }
 
 document.addEventListener("DOMContentLoaded", displayItems);
