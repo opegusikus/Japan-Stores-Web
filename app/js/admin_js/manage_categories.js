@@ -22,14 +22,14 @@ async function displayCategoriesInfo() {
     const header = document.getElementById('selectHeader');
     const options = document.getElementById('options');
     const allOption = document.createElement('div');
-    allOption.classList.add('option');
+    allOption.classList.add('option'); //All items option
     allOption.textContent = 'Всі товари';
     allOption.dataset.id = 'all';
-    allOption.addEventListener('click', () => {
+    allOption.addEventListener('click', () => { 
         header.textContent = 'Всі товари';
+        header.dataset.id = 'all';
         options.classList.remove('show');
         // Тут можна зробити fetch або іншу дію
-        console.log('Selected category ID:', 'all');
     });
     options.appendChild(allOption);
     header.textContent = 'Всі товари';
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function displayCategoriesForItemCreation() {
     const data = await getCategoriesInfo();
     let categoriesSelectionCreation = document.getElementById("category-id")
-    console.log(categoriesSelectionCreation);
+    // console.log(categoriesSelectionCreation);
     data.forEach(category => {
         const option = document.createElement("option");
         option.value = category.id;

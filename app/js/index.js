@@ -48,9 +48,9 @@ function removeBlock(id) {
 
 async function getItemsInfo() {
   const response = await fetch('/api/item/read', {
-    method: 'GET',
+    method: 'POST',
     credentials: 'include',
-    // body: JSON.stringify({ name: "Router" })
+    body: JSON.stringify({ name: null })
   });
 
   const data = await response.json();

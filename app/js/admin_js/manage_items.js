@@ -81,6 +81,7 @@ async function getItemsInfoByCategory() {//(param)
 async function createItem() {
     let categoryId = document.getElementById('category-id').value; // Replace with actual category ID or logic to get it
     let short_description = document.getElementById('previewDescr').value;
+    let imgSrc = document.getElementById('item-creation-img-src-input').value; // Replace with actual image source logic
     if (!categoryId) {
         alert("Please select a category before creating an item.");
         return;
@@ -97,7 +98,7 @@ async function createItem() {
             short_description: short_description,
             long_description: markupStr,
             price: 100,
-            image_url: "img/3467b654b3d189c5d7430e5cd0dc189d84d4c0221a365bf3688a7ce16a68cb1c.png",
+            image_url: imgSrc,
             availability: 10
         })
     });
@@ -130,7 +131,7 @@ async function displayItems() {
     clearAllItems(); 
     let itemsSection = document.getElementById("items-section");
     const itemsList = await getItemsInfoByCategory();
-    // console.log(itemsList);
+    console.log(itemsList);
     itemsList.forEach(item => {
 
         const displayBlock = document.createElement('div');

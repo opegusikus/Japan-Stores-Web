@@ -5,11 +5,8 @@ const itemId = urlParams.get('id');
 
 async function getItem(itemId) {
     const response = await fetch(`/api/item/read`, {
-    method: 'GET',
+    method: 'POST',
     credentials: 'include',
-    // data: JSON.stringify({ 
-    //     id: itemId 
-    // })
   });
 
   const data = await response.json();
@@ -43,6 +40,9 @@ async function editItem(item) {
 async function displayItem(itemId) {
     const item = await getItem(itemId); // ✅ чекаємо результат
     const itemsSection = document.getElementById('items-section');
+    const itemImage = document.getElementById('item-image');
+    itemImage.src = item.image_url; // ✅ встановлюємо src для зображення
+    console.log(itemImage.src);
     if (!item) {
         itemsSection.innerHTML = '<p>Item not found.</p>';
         return;
