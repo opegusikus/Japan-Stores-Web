@@ -1,4 +1,4 @@
-import { getItemsInfoByParam, displayItems, createItem, updateItem, deleteItem, clearAllItems } from './manage_items.js';
+import { getItemsInfoByCategory, displayItems, createItem, updateItem, deleteItem, clearAllItems } from './manage_items.js';
 import { displayCategoriesInfo, updateCategoriesDisplay, createCategory, updateCategory, deleteCategory, editCategory, cancelEditCategory, clearCategoriesDisplay } from './manage_categories.js';
 
 document.getElementById('save-creation-btn').addEventListener('click', () => {

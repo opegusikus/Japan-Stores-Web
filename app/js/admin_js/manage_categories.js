@@ -16,9 +16,26 @@ async function getCategoriesInfo() {
 };
 
 async function displayCategoriesInfo() {
+    // Custom select dropdown functionality 1
+    // ------------------------------------
     const select = document.getElementById('customSelect');
     const header = document.getElementById('selectHeader');
     const options = document.getElementById('options');
+    const allOption = document.createElement('div');
+    allOption.classList.add('option');
+    allOption.textContent = 'Всі товари';
+    allOption.dataset.id = 'all';
+    allOption.addEventListener('click', () => {
+        header.textContent = 'Всі товари';
+        options.classList.remove('show');
+        // Тут можна зробити fetch або іншу дію
+        console.log('Selected category ID:', 'all');
+    });
+    options.appendChild(allOption);
+    header.textContent = 'Всі товари';
+    header.dataset.id = 'all';
+    // ------------------------------------
+
     const data = await getCategoriesInfo();
     console.log(data);
     data.forEach(category => {
@@ -61,69 +78,55 @@ async function displayCategoriesInfo() {
         deleteCategory(category.id);
     });
 
-    // Custom select dropdown functionality
+    // Custom select dropdown functionality 2
     // ------------------------------------
-
-        // const optionItems = options.querySelectorAll('.option');
-        // options.innerHTML = '';
         const option = document.createElement('div');
         option.classList.add('option');
         option.textContent = category.name;
         option.dataset.id = category.id;
 
-        // Встановлюємо першу опцію як початкову
-        // if (option.length > 0) {
-        // header.textContent = option[0].textContent;
-        // }
-
         // Дія при натисканні
         option.addEventListener('click', () => {
             header.textContent = category.name;
+            header.dataset.id = category.id;
             options.classList.remove('show');
         });
         options.appendChild(option);
-      
-        // 3. Встановлюємо першу як обрану
-        if (data.length > 0) {
-            header.textContent = data[0].name;
-        }
+    }) //ForEach ends here
 
-        // Показати / сховати список
-        header.addEventListener('click', () => {
-            options.classList.toggle('show');
-            console.log(options);
-        });
-        // Закриваємо селект при кліку поза ним
-        document.addEventListener('click', (e) => {
-        if (!select.contains(e.target)) {
-            options.classList.remove('show');
-        }
-        });
+    // Закриваємо селект при кліку поза ним
+    document.addEventListener('click', (e) => {
+    if (!select.contains(e.target)) {
+        options.classList.remove('show');
+    }
+    });
+    // Показати / сховати список
+    header.addEventListener('click', () => {
+        options.classList.toggle('show');
     // ------------------------------------
-})
-
-    
+    });
 }
 
-displayCategoriesInfo();
+document.addEventListener('DOMContentLoaded', () => {
+  displayCategoriesInfo();
+  displayCategoriesForItemCreation();
+});
+
+
+
 
 async function displayCategoriesForItemCreation() {
     const data = await getCategoriesInfo();
     let categoriesSelectionCreation = document.getElementById("category-id")
-    let categoriesSelectionDisplay = document.getElementById("admin-select-display-byCategory");
+    console.log(categoriesSelectionCreation);
     data.forEach(category => {
         const option = document.createElement("option");
-        const option2 = document.createElement("option");
         option.value = category.id;
         option.textContent = category.name + " (ID: " + category.id + ", " + category.description + ")";
-        option2.value = category.id;
-        option2.textContent = category.name + " (ID: " + category.id + ", " + category.description + ")";
         categoriesSelectionCreation.appendChild(option);
-        categoriesSelectionDisplay.appendChild(option2);
     });
-    categoriesSelectionDisplay.value = "all";
 }
-// displayCategoriesForItemCreation()
+
 
 // async function deleteCookie() {
 //     const response = await fetch('/api/category/deleteCookie', {

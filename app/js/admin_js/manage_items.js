@@ -59,11 +59,10 @@ async function searchByName() {
 }
 
 
-async function getItemsInfoByParam() {//(param)
-    // console.log("getItemsInfoByParam called with param:", param);
-    const itemsFilterSelect = document.getElementById('admin-select-display-byCategory');
-    let categoryId = itemsFilterSelect.value;
-    const payload = categoryId === "null" ? null : categoryId;
+async function getItemsInfoByCategory() {//(param)
+    const itemsFilterSelect = document.getElementById('selectHeader');
+    let targetCategory = itemsFilterSelect.dataset.id;
+    const payload = targetCategory === "all" ? null : targetCategory;
     const response = await fetch('./api/item/read', {
     method: 'POST',
     headers: {
@@ -72,7 +71,6 @@ async function getItemsInfoByParam() {//(param)
         body: JSON.stringify({"category_id": payload})
   });
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
@@ -131,11 +129,8 @@ async function deleteItem(itemId) {
 async function displayItems() {
     clearAllItems(); 
     let itemsSection = document.getElementById("items-section");
-    const itemsList = await getItemsInfoByParam();
-    // const categoriesList = await getCategoriesInfo();
-    console.log(itemsList);
-    // console.log(categoriesList);
-    // clearAllItems();
+    const itemsList = await getItemsInfoByCategory();
+    // console.log(itemsList);
     itemsList.forEach(item => {
 
         const displayBlock = document.createElement('div');
@@ -285,4 +280,4 @@ function clearAllItems() {
     itemsSection.innerHTML = '';
 };
 
-export { getItemsInfoByParam, displayItems, createItem, updateItem, deleteItem, clearAllItems, updateItemsDisplay };
+export { getItemsInfoByCategory, displayItems, createItem, updateItem, deleteItem, clearAllItems, updateItemsDisplay };
