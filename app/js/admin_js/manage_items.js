@@ -80,9 +80,9 @@ async function getItemsInfoByCategory() {//(param)
 
 async function createItem() {
     let categoryId = document.getElementById('category-id').value; // Replace with actual category ID or logic to get it
-    let short_description = document.getElementById('previewDescr').value;
+    let short_description = document.getElementById('previewDescr-creation').value;
     let imgSrc = document.getElementById('item-creation-img-src-input').value; // Replace with actual image source logic
-    let nameEditInput = document.querySelector('#blockName');
+    let nameEditInput = document.querySelector('#blockName-creation');
     let markupStr = $('#summernote').summernote('code');
     let price = document.getElementById('priceInput').value;
     let quantity = document.getElementById('item-creation-quantityInput').value;
@@ -112,19 +112,33 @@ async function createItem() {
     }
 }
 
-async function updateItem(id) {
+async function updateItem(id) {     
+    const imageUrlEdit = document.getElementById('item-edit-img-src-input').value;
+    const categoryEdit = document.getElementById('category-id').value;
+    const nameEdit = document.getElementById('blockName').value;
+    const shortDescriptionEdit = document.getElementById('previewDescr').value;
+    const priceEdit = document.getElementById('priceInput').value;
+    const quantityEdit = document.getElementById('item-quantityInput-edit').value;
+    console.group(`LOG`)
+    console.log(imageUrlEdit);
+    console.log(categoryEdit);
+    console.log(nameEdit);
+    console.log(shortDescriptionEdit);
+    console.log(priceEdit);
+    console.log(quantityEdit);
+    console.groupEnd(`LOG`)
     const response = await fetch('/api/item/update', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },//
         body: JSON.stringify({
             id: id,
-            name: 'nameEditInput.value',
-            category_id: 139,
-            short_description: 'short_description',
+            name: nameEdit,
+            category_id: categoryEdit,
+            short_description: shortDescriptionEdit,
             long_description: 'markupStr',
-            price: 228,
-            image_url: 'https://js.x.ks.ua/img/3467b654b3d189c5d7430e5cd0dc189d84d4c0221a365bf3688a7ce16a68cb1c.png',
-            availability: 228
+            price: priceEdit,
+            image_url: imageUrlEdit,
+            availability: quantityEdit
         })
     })
     const result = await response.json();
@@ -178,9 +192,6 @@ async function displayItems() {
                         </div>
                         <p class="item-container-preview-s-descr" id="item-container-s-description"> <!-- Short description -->
                             ${item.short_description}
-                        </p>
-                        <p class="item-container-preview-s-descr">
-                            <textarea class="description-input preview-input" name="previewDescr" id="previewDescr" style="display: none;"></textarea>
                         </p>
                     </div>
                 </div>
@@ -247,7 +258,7 @@ function editItem(id) {
                         <div class="item-container-preview-statusBar"> <!-- flex; space-between; -->
                             <h3 class="item-container-preview-statusBar-title"><input class="preview-title" type="text" id="blockName" placeholder="Назва"></h3>
                             <h4 class="item-container-preview-statusBar-status">
-                                <input type="text" class="" id="item-edit-quantityInput" placeholder="Кількість" style="width: 128px; text-align: center;">
+                                <input type="text" class="" id="item-quantityInput-edit" placeholder="Кількість" style="width: 128px; text-align: center;">
                             </h4>
                         </div>
                         <p cl   ass="item-container-preview-s-descr"> <!-- Short description -->
