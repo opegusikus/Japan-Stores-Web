@@ -119,6 +119,7 @@ async function updateItem(id) {
     const shortDescriptionEdit = document.getElementById('previewDescr').value;
     const priceEdit = document.getElementById('priceInput').value;
     const quantityEdit = document.getElementById('item-quantityInput-edit').value;
+    const markupStrEdit = $('#summernote-edit').summernote('code');
     console.group(`LOG`)
     console.log(imageUrlEdit);
     console.log(categoryEdit);
@@ -126,6 +127,7 @@ async function updateItem(id) {
     console.log(shortDescriptionEdit);
     console.log(priceEdit);
     console.log(quantityEdit);
+    console.log(markupStrEdit);
     console.groupEnd(`LOG`)
     const response = await fetch('/api/item/update', {
         method: 'PATCH',
@@ -166,7 +168,7 @@ async function displayItems() {
     clearAllItems(); 
     let itemsSection = document.getElementById("items-section");
     const itemsList = await getItemsInfoByCategory();
-    console.log(itemsList);
+    // console.log(itemsList);
     itemsList.forEach(item => {
 
         const displayBlock = document.createElement('div');
@@ -222,6 +224,7 @@ async function displayItems() {
 
 async function displayCategoriesForItemEdit() { //select for every item inside item edit
     const data = await getCategoriesInfo();
+
     let categoriesSelectionEdit = document.getElementById("category-id")
     data.forEach(category => {
         const option = document.createElement("option");
@@ -231,7 +234,10 @@ async function displayCategoriesForItemEdit() { //select for every item inside i
     });
 }
 
+
+
 function editItem(id) {
+
     const itemBlock = document.querySelector(`.item-container[data-block-id="${id}"]`);
     itemBlock.querySelector('.item-container-onclick').style.display = 'none';
     const editWorkspace = document.createElement('div');
@@ -270,8 +276,8 @@ function editItem(id) {
                 <div class="item-container-d-description-fake" id="item-container-d-description"> <!-- Detailed description / expandable -->
                     <p>
                         <!-- <textarea class="description-input" name="mainDescr" id="mainDescr"></textarea> -->
-                        <div id="summernote"></div>
-                    </p>
+                            <div id="summernote-edit"></div>
+                        </p>
                 </div>
                 <div  style="display: flex; justify-content: flex-start;">
                     <h2 class="price">₴</h2><h2 class="price" style="width: 50%;"><input class="preview-title" type="text" id="priceInput"></h2><h2 class="price" style="margin-left:10px;">грн</h2>
@@ -286,6 +292,11 @@ function editItem(id) {
     itemBlock.appendChild(editWorkspace);
     itemBlock.querySelector('#save-edit-btn').addEventListener('click', () => updateItem(id));
     console.log(itemBlock.querySelector('#save-edit-btn'));
+    $('#summernote-edit').summernote({
+        placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height: 100
+    });
     displayCategoriesForItemEdit();
 }
 
