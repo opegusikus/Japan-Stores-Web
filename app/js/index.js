@@ -1,3 +1,6 @@
+// import { getItemsInfoByCategory } from './manage_items.js';
+// import { getCategoriesInfo } from './admin_js/manage_categories.js';
+
 let creationBlock = document.getElementById("creation-block");
 let categoriesBtn = document.querySelector("#nav-btn-link-categories");
 let categoriesPage = document.querySelector("#categories-dropdown");
@@ -6,6 +9,20 @@ let creation = false;
 let blocks = [];// Array to keep track of all blocks
 let blocksCreation = [];
 
+async function getCategoriesInfo() {
+    // if (categoriesCache) return categoriesCache;
+    const response = await fetch('/api/category/read', {
+        method: 'GET',
+        credentials: 'include'
+    });
+
+  const data = await response.json();
+//   console.log(data);
+//   data.forEach(category => {
+//     console.log(category.name);
+//   })
+  return data;
+};
 
 // Відкриття категорій
 categoriesBtn.onclick = function() {
@@ -61,10 +78,26 @@ async function getItemsInfo() {
 //   })
 }
 
+async function getItemsInfoByCategory() {//(param)
+    const itemsFilterSelect = document.getElementById('selectHeader');
+    let targetCategory = itemsFilterSelect.dataset.id;
+    const payload = targetCategory === "all" ? null : targetCategory;
+    const response = await fetch('./api/item/read', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+        body: JSON.stringify({"category_id": payload})
+  });
+  const data = await response.json();
+  return data;
+};
+
 //image upload and refresh
 async function displayItems() { 
     let itemsSection = document.getElementById("items-section");
-    const itemsList = await getItemsInfo();
+    itemsSection.innerHTML = ''; // Clear previous items
+    const itemsList = await getItemsInfoByCategory();
     console.log(itemsList);
     // clearAll()
     itemsList.forEach(item => {
@@ -128,6 +161,60 @@ async function displayItems() {
 
     })
     // console.log('finish');
-    
 }
+
+async function displayCategoriesDropdown() {
+    const categories = await getCategoriesInfo();
+    const select = document.getElementById('customSelect');
+    const header = document.getElementById('selectHeader');
+    const options = document.getElementById('options');
+    const allOption = document.createElement('div');
+    allOption.classList.add('option'); //All items option
+    allOption.textContent = 'Всі товари';
+    allOption.dataset.id = 'all';
+    allOption.addEventListener('click', () => { 
+        header.textContent = 'Всі товари';
+        header.dataset.id = 'all';
+        options.classList.remove('show');
+
+        // Тут можна зробити fetch або іншу дію
+    });
+    options.appendChild(allOption);
+    header.textContent = 'Всі товари';
+    header.dataset.id = 'all';
+    // ------------------------------------
+
+    categories.forEach(category => {
+    // Custom select dropdown functionality 2
+    // ------------------------------------
+        const option = document.createElement('div');
+        option.classList.add('option');
+        option.textContent = category.name;
+        option.dataset.id = category.id;
+
+        // Дія при натисканні
+        option.addEventListener('click', () => {
+            header.textContent = category.name;
+            header.dataset.id = category.id;
+            options.classList.remove('show');
+            displayItems();
+        });
+        options.appendChild(option);
+    }) //ForEach ends here
+
+    // Закриваємо селект при кліку поза ним
+    document.addEventListener('click', (e) => {
+    if (!select.contains(e.target)) {
+        options.classList.remove('show');
+    }
+    });
+    // Показати / сховати список
+    header.addEventListener('click', () => {
+        options.classList.toggle('show');
+    // ------------------------------------
+    });
+}
+
+displayCategoriesDropdown()
+
 document.addEventListener("DOMContentLoaded", displayItems);

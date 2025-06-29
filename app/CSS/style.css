@@ -1067,22 +1067,35 @@ button:focus {
     /* custom select filter by category */
 
     .custom-select {
+        margin: auto auto auto 15px;
       position: relative;
-      width: 200px;
+      width: 220px;
       user-select: none;
     }
 
     .select-header {
-      background-color: white;
+        font-weight: 600;
+        font-size: 32px;
+        height: 60px;
+        color: #fff;
+      /* background-color: white; */
       padding: 10px 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      /* border: 1px solid #ccc; */
+      /* border-radius: 8px; */
       cursor: pointer;
       transition: border-color 0.2s;
+        margin: auto;
+        /* padding-left: 15px; */
+        /* padding-right: 15px; */
+        /* padding: 15px; */
+        display: flex;
+        align-items: center;
+        background-color: var(--mainGreen);
     }
 
     .select-header:hover {
-      border-color: #888;
+      background-color: var(--mainWhite);
+      color: var(--mainGreen);
     }
 
     .options {

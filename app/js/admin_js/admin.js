@@ -3,6 +3,7 @@ import { displayCategoriesInfo, updateCategoriesDisplay, createCategory, updateC
 
 document.getElementById('save-creation-btn').addEventListener('click', () => {
     createItem();
+    creationBlock.style.display = "none";
 });
 document.getElementById('categoryEdit-add-btn').addEventListener('click', () => {
     createCategory();

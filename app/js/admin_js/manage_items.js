@@ -40,7 +40,7 @@ async function getItemsInfo() {
 //   });
 // });
 
-const searchBtn = document.getElementById('items-nav-search-btn');
+const searchBtn = document.getElementById('items-nav-search-input');
 searchBtn.addEventListener('click', searchByName);
 
 async function searchByName() {
@@ -79,13 +79,14 @@ async function getItemsInfoByCategory() {//(param)
 // getItemsInfoByParam();
 
 async function createItem() {
-    let categoryId = document.getElementById('category-id').value; // Replace with actual category ID or logic to get it
+    let categoryId = document.getElementById('category-id-creation').value; // Replace with actual category ID or logic to get it
+    console.log(categoryId);
     let short_description = document.getElementById('previewDescr-creation').value;
     let imgSrc = document.getElementById('item-creation-img-src-input').value; // Replace with actual image source logic
     let nameEditInput = document.querySelector('#blockName-creation');
     let markupStr = $('#summernote').summernote('code');
-    let price = document.getElementById('priceInput').value;
-    let quantity = document.getElementById('item-creation-quantityInput').value;
+    let price = document.getElementById('priceInput-creation').value;
+    let quantity = document.getElementById('item-quantityInput-creation').value;
     console.log(markupStr);
     if (!categoryId  || categoryId === "null" || short_description === "" || markupStr === "<p><br></p>" || imgSrc === "" || quantity === "" || price === "") {
         alert("Please enter all required fields: category, short description, image URL etc.");
